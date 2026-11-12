@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إدارة ونشر الأنشطة والقصص | مأوى القاهرة للكلاب</title>
+
+  <!-- Google Fonts: Cairo & Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            lotus: {
+              50: '#FDF2F4',
+              100: '#FCE7EC',
+              200: '#F8D0DB',
+              300: '#F2AEC1',
+              400: '#E88CA6',
+              500: '#D9829B',
+              600: '#C76B85',
+              700: '#B85875',
+              800: '#9E425E',
+              900: '#83394E',
+            },
+            charcoal: {
+              700: '#334155',
+              800: '#1E293B',
+              900: '#111827',
+              950: '#0F172A',
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-slate-100 text-charcoal-900 font-cairo antialiased min-h-screen flex flex-col md:flex-row">
+
+  <!-- الشريط الجانبي للإدارة -->
+  <aside id="admin-sidebar" class="w-full md:w-64 bg-charcoal-950 text-white shrink-0 flex flex-col justify-between border-l border-white/10 z-40">
+    <div>
+      <div class="p-5 border-b border-white/10 flex items-center justify-between">
+        <a href="admin-dashboard.html" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-lotus-600 text-white flex items-center justify-center shadow">
+            <i class="fa-solid fa-paw text-lg"></i>
+          </div>
+          <div>
+            <span class="block text-sm font-extrabold text-white">إدارة مأوى القاهرة</span>
+            <span class="block text-[10px] text-lotus-300 font-semibold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              غرفة العمليات نشطة
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <nav class="p-3 space-y-1 text-xs font-semibold">
+        <a href="admin-dashboard.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <i class="fa-solid fa-chart-pie w-4 text-center"></i>
+          <span>لوحة التحكم الرئيسية</span>
+        </a>
+
+        <a href="admin-reports.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-clipboard-list w-4 text-center text-lotus-400"></i>
+            <span>إدارة البلاغات</span>
+          </div>
+          <span id="sidebar-reports-count" class="px-2 py-0.5 rounded-full text-[10px] bg-lotus-900 text-lotus-200">4</span>
+        </a>
+
+        <a href="admin-help.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-hand-holding-medical w-4 text-center text-emerald-400"></i>
+            <span>طلبات المساعدة</span>
+          </div>
+          <span id="sidebar-help-count" class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-950 text-emerald-300">3</span>
+        </a>
+
+        <a href="admin-donations.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-heart w-4 text-center text-rose-400"></i>
+            <span>التبرعات الواردة</span>
+          </div>
+          <span id="sidebar-donations-count" class="px-2 py-0.5 rounded-full text-[10px] bg-rose-950 text-rose-300">4</span>
+        </a>
+
+        <a href="admin-careers.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-handshake-angle w-4 text-center text-amber-400"></i>
+            <span>التطوع والتوظيف</span>
+          </div>
+          <span id="sidebar-careers-count" class="px-2 py-0.5 rounded-full text-[10px] bg-amber-950 text-amber-300">3</span>
+        </a>
+
+        <a href="admin-activities.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-lotus-600 text-white shadow-sm">
+          <i class="fa-solid fa-newspaper w-4 text-center"></i>
+          <span>الأنشطة والأخبار</span>
+        </a>
+
+        <a href="admin-users.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <i class="fa-solid fa-users-gear w-4 text-center text-indigo-400"></i>
+          <span>المستخدمين والصلاحيات</span>
+        </a>
+
+        <div class="pt-4 border-t border-white/10 mt-4">
+          <a href="map.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+            <i class="fa-solid fa-map-location-dot w-4 text-center text-lotus-400"></i>
+            <span>خريطة العمليات الميدانية</span>
+          </a>
+          <a href="index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:bg-white/5 hover:text-white transition-colors">
+            <i class="fa-solid fa-arrow-up-right-from-square w-4 text-center"></i>
+            <span>بوابة المواطنين العامة</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-white/10 bg-black/20">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-lotus-700 text-white font-bold flex items-center justify-center text-xs">
+            ط.س
+          </div>
+          <div>
+            <span class="block text-xs font-bold text-white">د. طارق سامي</span>
+            <span class="block text-[10px] text-slate-400">مشرف العمليات</span>
+          </div>
+        </div>
+        <button type="button" id="admin-logout-btn" class="p-1.5 text-slate-400 hover:text-rose-400 transition-colors" title="تسجيل الخروج">
+          <i class="fa-solid fa-power-off text-sm"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- المحتوى الرئيسي -->
+  <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+    
+    <header class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
+      <div class="flex items-center gap-3">
+        <h1 class="text-lg font-black text-charcoal-950">إدارة ونشر قصص الإنقاذ والأنشطة</h1>
+      </div>
+
+      <button type="button" id="open-new-activity-btn" class="px-3.5 py-2 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-xl transition-colors flex items-center gap-1.5">
+        <i class="fa-solid fa-plus"></i>
+        <span>نشر خبر أو قصة جديدة</span>
+      </button>
+    </header>
+
+    <main class="p-6 space-y-6">
+      
+      <!-- جدول الأنشطة المنشورة -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-right text-xs">
+            <thead class="bg-slate-50 text-slate-600 border-b border-slate-200 font-bold">
+              <tr>
+                <th class="py-3.5 px-4">الصورة</th>
+                <th class="py-3.5 px-4">العنوان</th>
+                <th class="py-3.5 px-4">التصنيف</th>
+                <th class="py-3.5 px-4">تاريخ النشر</th>
+                <th class="py-3.5 px-4 text-center">معاينة بالموقع</th>
+              </tr>
+            </thead>
+            <tbody id="activities-table-body" class="divide-y divide-slate-100">
+              <!-- تتولد ديناميكياً -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- مودال إضافة خبر جديد -->
+  <div id="new-activity-modal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal-950/70 backdrop-blur-sm">
+    <div class="modal-content bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-100 p-6">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+        <h3 class="text-base font-bold text-charcoal-950">نشر قصة إنقاذ أو خبر نشاط</h3>
+        <button type="button" id="close-activity-modal-btn" class="p-1.5 text-slate-400 hover:text-charcoal-900">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form id="new-activity-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-charcoal-900 mb-1">عنوان النشاط / القصة <span class="text-rose-500">*</span></label>
+          <input type="text" id="actTitle" required placeholder="مثال: إنقاذ جراء شبرامنت وتوفير الرعاية اللازمة" class="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal-900 mb-1">التصنيف <span class="text-rose-500">*</span></label>
+          <select id="actCategory" class="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white font-bold">
+            <option value="حملات التعقيم (TNR)">حملات التعقيم (TNR)</option>
+            <option value="قصص إنقاذ ملهمة" selected>قصص إنقاذ ملهمة</option>
+            <option value="فعاليات التبني">فعاليات التبني</option>
+            <option value="تقارير الميدان">تقارير الميدان</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal-900 mb-1">ملخص قصير يظهر في البطاقة <span class="text-rose-500">*</span></label>
+          <input type="text" id="actSummary" required placeholder="جملتان تلخصان الإنجاز..." class="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal-900 mb-1">تفاصيل القصة الكاملة <span class="text-rose-500">*</span></label>
+          <textarea id="actDetails" required rows="4" placeholder="اكتب القصة كاملة..." class="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-3 px-4 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-xl shadow transition-colors flex items-center justify-center gap-2">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <span>نشر القصة فوراً في صفحة الأنشطة العامة</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const activities = window.ShelterDB.getAllActivities();
+      const tableBody = document.getElementById('activities-table-body');
+      const openModalBtn = document.getElementById('open-new-activity-btn');
+      const modal = document.getElementById('new-activity-modal');
+      const closeModalBtn = document.getElementById('close-activity-modal-btn');
+      const form = document.getElementById('new-activity-form');
+
+      document.getElementById('sidebar-reports-count').textContent = window.ShelterDB.getAllReports().length;
+      document.getElementById('sidebar-help-count').textContent = window.ShelterDB.getAllHelpRequests().length;
+      document.getElementById('sidebar-donations-count').textContent = window.ShelterDB.getAllDonations().length;
+      document.getElementById('sidebar-careers-count').textContent = window.ShelterDB.getAllCareers().length;
+
+      const renderActivities = () => {
+        if (!tableBody) return;
+        tableBody.innerHTML = '';
+
+        activities.forEach(a => {
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-slate-50 transition-colors';
+          row.innerHTML = `
+            <td class="py-3 px-4">
+              <img src="${a.image || 'assets/images/hero-1.jpg'}" alt="" class="w-12 h-10 rounded-lg object-cover border border-slate-200" />
+            </td>
+            <td class="py-3 px-4 font-bold text-charcoal-900 max-w-sm truncate">${a.title}</td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-lotus-100 text-lotus-800">${a.category}</span>
+            </td>
+            <td class="py-3 px-4 text-slate-400 text-[11px] whitespace-nowrap">${a.date}</td>
+            <td class="py-3 px-4 text-center">
+              <a href="activities.html" target="_blank" class="px-2.5 py-1 text-xs font-bold text-lotus-700 hover:bg-lotus-50 rounded border border-lotus-200">
+                معاينة
+              </a>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      };
+
+      renderActivities();
+
+      if (openModalBtn && modal) {
+        openModalBtn.addEventListener('click', () => modal.classList.add('open'));
+      }
+
+      if (closeModalBtn && modal) {
+        closeModalBtn.addEventListener('click', () => modal.classList.remove('open'));
+      }
+
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          window.ShelterDB.createActivity({
+            title: document.getElementById('actTitle').value.trim(),
+            category: document.getElementById('actCategory').value,
+            summary: document.getElementById('actSummary').value.trim(),
+            details: document.getElementById('actDetails').value.trim(),
+            image: 'assets/images/hero-2.jpg',
+            readTime: '3 دقائق قراءة'
+          });
+
+          modal.classList.remove('open');
+          alert('تم نشر الخبر بنجاح وستجده الآن معروضاً في صفحة الأنشطة العامة.');
+          window.location.reload();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

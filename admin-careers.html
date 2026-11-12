@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إدارة طلبات التطوع والتوظيف | مأوى القاهرة للكلاب</title>
+
+  <!-- Google Fonts: Cairo & Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            lotus: {
+              50: '#FDF2F4',
+              100: '#FCE7EC',
+              200: '#F8D0DB',
+              300: '#F2AEC1',
+              400: '#E88CA6',
+              500: '#D9829B',
+              600: '#C76B85',
+              700: '#B85875',
+              800: '#9E425E',
+              900: '#83394E',
+            },
+            charcoal: {
+              700: '#334155',
+              800: '#1E293B',
+              900: '#111827',
+              950: '#0F172A',
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-slate-100 text-charcoal-900 font-cairo antialiased min-h-screen flex flex-col md:flex-row">
+
+  <!-- الشريط الجانبي للإدارة -->
+  <aside id="admin-sidebar" class="w-full md:w-64 bg-charcoal-950 text-white shrink-0 flex flex-col justify-between border-l border-white/10 z-40">
+    <div>
+      <div class="p-5 border-b border-white/10 flex items-center justify-between">
+        <a href="admin-dashboard.html" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-lotus-600 text-white flex items-center justify-center shadow">
+            <i class="fa-solid fa-paw text-lg"></i>
+          </div>
+          <div>
+            <span class="block text-sm font-extrabold text-white">إدارة مأوى القاهرة</span>
+            <span class="block text-[10px] text-lotus-300 font-semibold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              غرفة العمليات نشطة
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <nav class="p-3 space-y-1 text-xs font-semibold">
+        <a href="admin-dashboard.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <i class="fa-solid fa-chart-pie w-4 text-center"></i>
+          <span>لوحة التحكم الرئيسية</span>
+        </a>
+
+        <a href="admin-reports.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-clipboard-list w-4 text-center text-lotus-400"></i>
+            <span>إدارة البلاغات</span>
+          </div>
+          <span id="sidebar-reports-count" class="px-2 py-0.5 rounded-full text-[10px] bg-lotus-900 text-lotus-200">4</span>
+        </a>
+
+        <a href="admin-help.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-hand-holding-medical w-4 text-center text-emerald-400"></i>
+            <span>طلبات المساعدة</span>
+          </div>
+          <span id="sidebar-help-count" class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-950 text-emerald-300">3</span>
+        </a>
+
+        <a href="admin-donations.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-heart w-4 text-center text-rose-400"></i>
+            <span>التبرعات الواردة</span>
+          </div>
+          <span id="sidebar-donations-count" class="px-2 py-0.5 rounded-full text-[10px] bg-rose-950 text-rose-300">4</span>
+        </a>
+
+        <a href="admin-careers.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-lotus-600 text-white shadow-sm">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-handshake-angle w-4 text-center"></i>
+            <span>التطوع والتوظيف</span>
+          </div>
+          <span id="sidebar-careers-count" class="px-2 py-0.5 rounded-full text-[10px] bg-amber-950 text-white">3</span>
+        </a>
+
+        <a href="admin-activities.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <i class="fa-solid fa-newspaper w-4 text-center text-cyan-400"></i>
+          <span>الأنشطة والأخبار</span>
+        </a>
+
+        <a href="admin-users.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <i class="fa-solid fa-users-gear w-4 text-center text-indigo-400"></i>
+          <span>المستخدمين والصلاحيات</span>
+        </a>
+
+        <div class="pt-4 border-t border-white/10 mt-4">
+          <a href="map.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+            <i class="fa-solid fa-map-location-dot w-4 text-center text-lotus-400"></i>
+            <span>خريطة العمليات الميدانية</span>
+          </a>
+          <a href="index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:bg-white/5 hover:text-white transition-colors">
+            <i class="fa-solid fa-arrow-up-right-from-square w-4 text-center"></i>
+            <span>بوابة المواطنين العامة</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-white/10 bg-black/20">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-lotus-700 text-white font-bold flex items-center justify-center text-xs">
+            ط.س
+          </div>
+          <div>
+            <span class="block text-xs font-bold text-white">د. طارق سامي</span>
+            <span class="block text-[10px] text-slate-400">مشرف العمليات</span>
+          </div>
+        </div>
+        <button type="button" id="admin-logout-btn" class="p-1.5 text-slate-400 hover:text-rose-400 transition-colors" title="تسجيل الخروج">
+          <i class="fa-solid fa-power-off text-sm"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- المحتوى الرئيسي -->
+  <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+    
+    <header class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
+      <div class="flex items-center gap-3">
+        <h1 class="text-lg font-black text-charcoal-950">إدارة طلبات التطوع والوظائف الشاغرة</h1>
+      </div>
+
+      <a href="careers.html" target="_blank" class="px-3.5 py-2 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-xl transition-colors flex items-center gap-1.5">
+        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+        <span>صفحة التوظيف العامة</span>
+      </a>
+    </header>
+
+    <main class="p-6 space-y-6">
+      
+      <!-- جدول المتقدمين -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-right text-xs">
+            <thead class="bg-slate-50 text-slate-600 border-b border-slate-200 font-bold">
+              <tr>
+                <th class="py-3.5 px-4">رقم الطلب</th>
+                <th class="py-3.5 px-4">النوع</th>
+                <th class="py-3.5 px-4">المسار / الوظيفة</th>
+                <th class="py-3.5 px-4">اسم المتقدم</th>
+                <th class="py-3.5 px-4">بيانات التواصل</th>
+                <th class="py-3.5 px-4">الخبرات / التفرغ</th>
+                <th class="py-3.5 px-4">الحالة</th>
+                <th class="py-3.5 px-4 text-center">إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="careers-table-body" class="divide-y divide-slate-100">
+              <!-- تتولد ديناميكياً -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const careers = window.ShelterDB.getAllCareers();
+      const tableBody = document.getElementById('careers-table-body');
+
+      document.getElementById('sidebar-reports-count').textContent = window.ShelterDB.getAllReports().length;
+      document.getElementById('sidebar-help-count').textContent = window.ShelterDB.getAllHelpRequests().length;
+      document.getElementById('sidebar-donations-count').textContent = window.ShelterDB.getAllDonations().length;
+      document.getElementById('sidebar-careers-count').textContent = careers.length;
+
+      if (tableBody) {
+        tableBody.innerHTML = '';
+        if (careers.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="8" class="text-center py-8 text-slate-400">لا توجد طلبات تطوع أو توظيف مسجلة</td></tr>`;
+          return;
+        }
+
+        careers.forEach(c => {
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-slate-50 transition-colors';
+          row.innerHTML = `
+            <td class="py-3 px-4 font-mono font-bold text-lotus-700">${c.id}</td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold ${c.type === 'تطوع' ? 'bg-amber-100 text-amber-800' : 'bg-purple-100 text-purple-800'}">
+                ${c.type}
+              </span>
+            </td>
+            <td class="py-3 px-4 font-bold text-charcoal-900">${c.track || c.position || ''}</td>
+            <td class="py-3 px-4 font-medium">${c.name}</td>
+            <td class="py-3 px-4">
+              <a href="tel:${c.phone}" class="text-[11px] text-lotus-700 hover:underline dir-ltr inline-block">${c.phone}</a>
+              <span class="block text-[10px] text-slate-400 dir-ltr text-right">${c.email || ''}</span>
+            </td>
+            <td class="py-3 px-4 text-slate-600 max-w-xs truncate">${c.skills || c.experience || c.availability || ''}</td>
+            <td class="py-3 px-4">
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                ${c.status}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <button type="button" class="change-career-btn px-2.5 py-1 text-xs font-bold text-lotus-700 hover:bg-lotus-50 rounded border border-lotus-200" data-id="${c.id}">
+                تحديث
+              </button>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+
+        document.querySelectorAll('.change-career-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.dataset.id;
+            const newSt = prompt('أدخل حالة الطلب (مثال: تمت الموافقة، قيد المقابلة، معلق):', 'تمت الموافقة والتواصل');
+            if (newSt) {
+              window.ShelterDB.updateCareerStatus(id, newSt);
+              window.location.reload();
+            }
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

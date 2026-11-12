@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أنشطة المأوى وقصص الإنقاذ الميداني | مأوى القاهرة للكلاب</title>
+  <meta name="description" content="تابع أحدث أنشطة مأوى القاهرة: تقارير حملات التعقيم والتطعيم الوطني (TNR) في شبرامنت وسقارة، قصص تعافي الكلاب المنقذة، وأيام التبني المفتوحة." />
+
+  <!-- Google Fonts: Cairo & Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            lotus: {
+              50: '#FDF2F4',
+              100: '#FCE7EC',
+              200: '#F8D0DB',
+              300: '#F2AEC1',
+              400: '#E88CA6',
+              500: '#D9829B',
+              600: '#C76B85',
+              700: '#B85875',
+              800: '#9E425E',
+              900: '#83394E',
+            },
+            charcoal: {
+              700: '#334155',
+              800: '#1E293B',
+              900: '#111827',
+              950: '#0F172A',
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-slate-50 text-charcoal-900 font-cairo antialiased selection:bg-lotus-200 selection:text-lotus-900 min-h-screen flex flex-col justify-between">
+
+  <!-- ======================================================================
+       شريط التنقل العلوي الموحد
+       ====================================================================== -->
+  <header id="main-navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3.5 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 text-charcoal-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-4">
+        
+        <!-- الشعار والهوية البصرية -->
+        <a href="index.html" class="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-lotus-400 rounded-lg">
+          <div class="w-10 h-10 rounded-xl bg-lotus-600 text-white flex items-center justify-center shadow-md shadow-lotus-900/20 group-hover:scale-105 transition-transform duration-200">
+            <i class="fa-solid fa-paw text-lg"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="brand-title text-base lg:text-lg font-extrabold tracking-tight text-charcoal-950 transition-colors">
+              مأوى القاهرة للكلاب
+            </span>
+            <span class="brand-subtitle text-[10px] lg:text-[11px] font-medium text-slate-500 transition-colors hidden sm:block">
+              النظام الرقمي لإدارة المأوى ورعاية البلاغات
+            </span>
+          </div>
+        </a>
+
+        <!-- روابط التنقل الرئيسية الموحدة -->
+        <nav class="hidden md:flex items-center gap-1.5 lg:gap-2 xl:gap-3.5 text-xs xl:text-sm font-semibold">
+          <a href="index.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1">الرئيسية</a>
+          <a href="index.html#about" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1">من نحن</a>
+          <a href="map.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1 flex items-center gap-1">
+            <i class="fa-solid fa-map-location-dot text-[11px] text-lotus-600"></i>
+            خريطة العمليات
+          </a>
+          <a href="report.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap flex items-center gap-1.5 px-1 py-1">
+            <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+            تقديم بلاغ
+          </a>
+          <a href="track.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1">متابعة بلاغ</a>
+          <a href="help.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1">طلب مساعدة</a>
+          <a href="careers.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1">التطوع والوظائف</a>
+          <a href="activities.html" class="nav-link text-lotus-700 font-bold border-b-2 border-lotus-600 transition-colors whitespace-nowrap px-1 py-1">أنشطة المأوى</a>
+        </nav>
+
+        <!-- أزرار الإجراءات في نهاية الشريط -->
+        <div class="hidden sm:flex items-center gap-2 xl:gap-3 shrink-0">
+          <a href="donate.html" class="px-3 py-1.5 xl:px-3.5 xl:py-2 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-heart text-xs"></i>
+            <span>تبرع الآن</span>
+          </a>
+
+          <a href="admin-login.html" class="px-3 py-1.5 xl:px-3.5 xl:py-2 text-xs font-bold text-charcoal-950 bg-white hover:bg-slate-50 border border-slate-300 rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-lock text-xs text-lotus-700"></i>
+            <span>لوحة الإدارة</span>
+          </a>
+        </div>
+
+        <!-- زر القائمة للهواتف (Hamburger Button) -->
+        <div class="flex items-center gap-2 md:hidden">
+          <a href="report.html" class="sm:hidden px-2.5 py-1 text-xs font-bold bg-lotus-600 text-white rounded-lg shadow-sm">
+            بلاغ سريع
+          </a>
+          
+          <button id="mobile-menu-btn" class="mobile-toggle-btn p-2 rounded-lg bg-slate-100 text-charcoal-900 hover:bg-slate-200 transition-colors focus:outline-none" aria-label="فتح القائمة الرئيسية">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- القائمة المنسدلة للهواتف - تفتح من الجهة اليسرى (Left-aligned Mobile Drawer) -->
+  <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-charcoal-950/80 backdrop-blur-sm md:hidden transition-opacity duration-300">
+    <div id="mobile-menu-drawer" class="fixed top-0 left-0 w-5/6 max-w-sm h-full bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto border-r border-slate-200 transform -translate-x-full transition-transform duration-300 ease-out">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+          <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-lg bg-lotus-600 text-white flex items-center justify-center">
+              <i class="fa-solid fa-paw text-base"></i>
+            </div>
+            <span class="text-base font-bold text-charcoal-900">مأوى القاهرة للكلاب</span>
+          </div>
+          <button id="mobile-menu-close" class="p-2 text-gray-400 hover:text-gray-700 focus:outline-none" aria-label="إغلاق القائمة">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <nav class="mt-6 flex flex-col gap-1.5">
+          <a href="index.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-house text-gray-400 w-5"></i>
+            الرئيسية
+          </a>
+          <a href="index.html#about" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-heart-pulse text-gray-400 w-5"></i>
+            من نحن وخدماتنا
+          </a>
+          <a href="map.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-map-location-dot text-lotus-600 w-5"></i>
+            خريطة العمليات
+          </a>
+          <a href="report.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-truck-medical text-gray-400 w-5"></i>
+            تقديم بلاغ
+          </a>
+          <a href="track.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-magnifying-glass-location text-gray-400 w-5"></i>
+            متابعة بلاغ
+          </a>
+          <a href="help.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-hand-holding-medical text-gray-400 w-5"></i>
+            طلب مساعدة
+          </a>
+          <a href="careers.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-handshake-angle text-gray-400 w-5"></i>
+            التطوع والوظائف
+          </a>
+          <a href="activities.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-lotus-700 bg-lotus-50 transition-colors">
+            <i class="fa-solid fa-shield-dog text-lotus-600 w-5"></i>
+            أنشطة المأوى
+          </a>
+          <a href="donate.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-lotus-700 bg-lotus-100/80 transition-colors mt-2">
+            <i class="fa-solid fa-heart text-lotus-600 w-5"></i>
+            تبرع الآن
+          </a>
+        </nav>
+      </div>
+
+      <div class="pt-6 border-t border-gray-100 space-y-3">
+        <a href="admin-login.html" class="w-full py-2.5 px-4 text-xs font-bold text-center text-white bg-charcoal-900 hover:bg-charcoal-800 rounded-lg flex items-center justify-center gap-2">
+          <i class="fa-solid fa-lock text-lotus-400"></i>
+          <span>لوحة الإدارة</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       المحتوى الرئيسي: بطاقات الأنشطة والقصص
+       ====================================================================== -->
+  <main class="pt-28 pb-16 flex-grow">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- رأس الصفحة -->
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lotus-100 border border-lotus-200 text-lotus-800 text-xs font-bold mb-3">
+          <i class="fa-solid fa-newspaper text-lotus-600"></i>
+          <span>توثيق حي للجهود الميدانية وقصص التعافي في القاهرة</span>
+        </div>
+        <h1 class="text-2xl sm:text-4xl font-black text-charcoal-950 tracking-tight">
+          أنشطة المأوى وقصص النجاح الميدانية
+        </h1>
+        <p class="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
+          كل قصة هنا هي دليل على أن الرفق يصنع المعجزات. تابع أحدث أخبار حملات التعقيم (TNR)، جولات الإنقاذ في شبرامنت وسقارة، وأيام التبني المفتوحة.
+        </p>
+      </div>
+
+      <!-- أزرار التصنيف والفلترة السريعة -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
+        <button type="button" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-lotus-600 text-white shadow-sm" data-category="الكل">
+          جميع الأنشطة
+        </button>
+        <button type="button" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white border border-slate-300 text-slate-700 hover:border-lotus-400" data-category="حملات التعقيم (TNR)">
+          حملات التعقيم (TNR)
+        </button>
+        <button type="button" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white border border-slate-300 text-slate-700 hover:border-lotus-400" data-category="قصص إنقاذ ملهمة">
+          قصص إنقاذ ملهمة
+        </button>
+        <button type="button" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white border border-slate-300 text-slate-700 hover:border-lotus-400" data-category="فعاليات التبني">
+          فعاليات التبني
+        </button>
+      </div>
+
+      <!-- شبكة بطاقات الأنشطة (تتولد تلقائياً من LocalStorage) -->
+      <div id="activities-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <!-- البطاقات تضاف ديناميكياً بواسطة JavaScript -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- نافذة مودال قراءة القصة الكاملة -->
+  <div id="story-modal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal-950/70 backdrop-blur-sm">
+    <div class="modal-content bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden max-h-[90vh] flex flex-col">
+      <div class="relative h-60 w-full overflow-hidden shrink-0 bg-charcoal-950">
+        <img id="modal-story-img" src="" alt="صورة القصة" class="w-full h-full object-cover" />
+        <button type="button" id="close-story-modal-btn" class="absolute top-3 left-3 w-9 h-9 rounded-full bg-charcoal-950/70 text-white hover:bg-rose-600 flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+        <span id="modal-story-category" class="absolute bottom-3 right-3 px-3 py-1 bg-lotus-600 text-white text-xs font-bold rounded-lg shadow"></span>
+      </div>
+
+      <div class="p-6 overflow-y-auto space-y-4">
+        <div class="flex items-center gap-3 text-xs text-slate-400">
+          <span id="modal-story-date"><i class="fa-regular fa-calendar ml-1"></i></span>
+          <span>•</span>
+          <span id="modal-story-read"><i class="fa-regular fa-clock ml-1"></i></span>
+        </div>
+
+        <h3 id="modal-story-title" class="text-xl font-black text-charcoal-950 leading-snug"></h3>
+        <p id="modal-story-details" class="text-sm text-slate-700 leading-relaxed font-normal whitespace-pre-line"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- تذييل الصفحة الموحد -->
+  <footer class="bg-charcoal-950 text-white pt-12 pb-8 border-t border-white/10 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-400">
+      <p>النظام الرقمي لإدارة مأوى الكلاب الضالة بالقاهرة © 2025 - جميع الحقوق محفوظة لفرق الإنقاذ والرعاية الإنسانية.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const activitiesGrid = document.getElementById('activities-grid');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const storyModal = document.getElementById('story-modal');
+      const closeStoryModalBtn = document.getElementById('close-story-modal-btn');
+      const modalStoryImg = document.getElementById('modal-story-img');
+      const modalStoryCat = document.getElementById('modal-story-category');
+      const modalStoryDate = document.getElementById('modal-story-date');
+      const modalStoryRead = document.getElementById('modal-story-read');
+      const modalStoryTitle = document.getElementById('modal-story-title');
+      const modalStoryDetails = document.getElementById('modal-story-details');
+
+      let allActivities = window.ShelterDB.getAllActivities();
+
+      const renderActivities = (category = 'الكل') => {
+        if (!activitiesGrid) return;
+        activitiesGrid.innerHTML = '';
+
+        const filtered = category === 'الكل' 
+          ? allActivities 
+          : allActivities.filter(a => a.category === category);
+
+        if (filtered.length === 0) {
+          activitiesGrid.innerHTML = `
+            <div class="col-span-full py-12 text-center text-slate-400">
+              <i class="fa-regular fa-folder-open text-4xl mb-3 block"></i>
+              <p class="text-sm">لا توجد أنشطة مسجلة في هذا التصنيف حالياً.</p>
+            </div>
+          `;
+          return;
+        }
+
+        filtered.forEach(act => {
+          const card = document.createElement('div');
+          card.className = 'bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between group';
+          card.innerHTML = `
+            <div>
+              <div class="relative h-48 w-full overflow-hidden bg-slate-100">
+                <img src="${act.image || 'assets/images/hero-1.jpg'}" alt="${act.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <span class="absolute top-3 right-3 px-2.5 py-1 rounded-lg text-xs font-bold text-white bg-charcoal-950/80 backdrop-blur-md">
+                  ${act.category}
+                </span>
+              </div>
+              <div class="p-5">
+                <div class="flex items-center gap-2 text-[11px] text-slate-400 mb-2">
+                  <span><i class="fa-regular fa-calendar ml-1 text-lotus-500"></i> ${act.date}</span>
+                  <span>•</span>
+                  <span><i class="fa-regular fa-clock ml-1"></i> ${act.readTime || '3 دقائق'}</span>
+                </div>
+                <h3 class="text-base font-extrabold text-charcoal-900 group-hover:text-lotus-700 transition-colors line-clamp-2 leading-snug mb-2">
+                  ${act.title}
+                </h3>
+                <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed">
+                  ${act.summary}
+                </p>
+              </div>
+            </div>
+            <div class="p-5 pt-0">
+              <button type="button" class="read-story-btn w-full py-2.5 px-4 text-xs font-bold text-lotus-700 bg-lotus-50 hover:bg-lotus-100 rounded-xl transition-colors flex items-center justify-center gap-1.5" data-id="${act.id}">
+                <span>قراءة القصة كاملة</span>
+                <i class="fa-solid fa-arrow-left text-[10px]"></i>
+              </button>
+            </div>
+          `;
+          activitiesGrid.appendChild(card);
+        });
+
+        // تفعيل أزرار القراءة
+        document.querySelectorAll('.read-story-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.dataset.id;
+            const act = allActivities.find(a => a.id === id);
+            if (act) {
+              modalStoryImg.src = act.image || 'assets/images/hero-1.jpg';
+              modalStoryCat.textContent = act.category;
+              modalStoryDate.innerHTML = `<i class="fa-regular fa-calendar ml-1"></i> ${act.date}`;
+              modalStoryRead.innerHTML = `<i class="fa-regular fa-clock ml-1"></i> ${act.readTime || '3 دقائق'}`;
+              modalStoryTitle.textContent = act.title;
+              modalStoryDetails.textContent = act.details || act.summary;
+              storyModal.classList.add('open');
+            }
+          });
+        });
+      };
+
+      renderActivities();
+
+      // فلترة الأزرار
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.className = 'filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white border border-slate-300 text-slate-700 hover:border-lotus-400';
+          });
+          btn.className = 'filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-lotus-600 text-white shadow-sm';
+          const cat = btn.dataset.category;
+          renderActivities(cat);
+        });
+      });
+
+      if (closeStoryModalBtn && storyModal) {
+        closeStoryModalBtn.addEventListener('click', () => {
+          storyModal.classList.remove('open');
+        });
+        storyModal.addEventListener('click', (e) => {
+          if (e.target === storyModal) storyModal.classList.remove('open');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

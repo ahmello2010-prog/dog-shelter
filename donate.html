@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>التبرع للمأوى ودعم الكلاب المنقذة بالقاهرة | Digital Shelter System</title>
+  <meta name="description" content="ساهم في إنقاذ وإيواء كلاب شوارع القاهرة: تبرعات مالية عبر إنستا باي وفودافون كاش، تبرعات عينية (طعام وبطاطين)، أو تبرع بالخدمات البيطرية والنقل." />
+
+  <!-- Google Fonts: Cairo & Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            lotus: {
+              50: '#FDF2F4',
+              100: '#FCE7EC',
+              200: '#F8D0DB',
+              300: '#F2AEC1',
+              400: '#E88CA6',
+              500: '#D9829B',
+              600: '#C76B85',
+              700: '#B85875',
+              800: '#9E425E',
+              900: '#83394E',
+            },
+            charcoal: {
+              700: '#334155',
+              800: '#1E293B',
+              900: '#111827',
+              950: '#0F172A',
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-slate-50 text-charcoal-900 font-cairo antialiased selection:bg-lotus-200 selection:text-lotus-900 min-h-screen flex flex-col justify-between">
+
+  <!-- ======================================================================
+       شريط التنقل العلوي الموحد
+       ====================================================================== -->
+  <header id="main-navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3.5 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 text-charcoal-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-4">
+        
+        <!-- الشعار والهوية البصرية -->
+        <a href="index.html" class="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-lotus-400 rounded-lg">
+          <div class="w-10 h-10 rounded-xl bg-lotus-600 text-white flex items-center justify-center shadow-md shadow-lotus-900/20 group-hover:scale-105 transition-transform duration-200">
+            <i class="fa-solid fa-paw text-lg"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="brand-title text-base lg:text-lg font-extrabold tracking-tight text-charcoal-950 transition-colors">
+              مأوى القاهرة للكلاب
+            </span>
+            <span class="brand-subtitle text-[10px] lg:text-[11px] font-medium text-slate-500 transition-colors hidden sm:block">
+              النظام الرقمي لإدارة المأوى ورعاية البلاغات
+            </span>
+          </div>
+        </a>
+
+        <!-- روابط التنقل الرئيسية الموحدة -->
+        <nav class="hidden md:flex items-center gap-1.5 lg:gap-2 xl:gap-3.5 text-xs xl:text-sm font-semibold">
+          <a href="index.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1">الرئيسية</a>
+          <a href="index.html#about" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1">من نحن</a>
+          <a href="map.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1 flex items-center gap-1">
+            <i class="fa-solid fa-map-location-dot text-[11px] text-lotus-600"></i>
+            خريطة العمليات
+          </a>
+          <a href="report.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap flex items-center gap-1.5 px-1 py-1">
+            <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+            تقديم بلاغ
+          </a>
+          <a href="track.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1">متابعة بلاغ</a>
+          <a href="help.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1">طلب مساعدة</a>
+          <a href="careers.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1">التطوع والوظائف</a>
+          <a href="activities.html" class="nav-link text-slate-700 hover:text-lotus-700 transition-colors whitespace-nowrap px-1 py-1">أنشطة المأوى</a>
+        </nav>
+
+        <!-- أزرار الإجراءات في نهاية الشريط -->
+        <div class="hidden sm:flex items-center gap-2 xl:gap-3 shrink-0">
+          <a href="donate.html" class="px-3 py-1.5 xl:px-3.5 xl:py-2 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 ring-2 ring-lotus-400/50 rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-heart text-xs"></i>
+            <span>تبرع الآن</span>
+          </a>
+
+          <a href="admin-login.html" class="px-3 py-1.5 xl:px-3.5 xl:py-2 text-xs font-bold text-charcoal-950 bg-white hover:bg-slate-50 border border-slate-300 rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-lock text-xs text-lotus-700"></i>
+            <span>لوحة الإدارة</span>
+          </a>
+        </div>
+
+        <!-- زر القائمة للهواتف (Hamburger Button) -->
+        <div class="flex items-center gap-2 md:hidden">
+          <a href="report.html" class="sm:hidden px-2.5 py-1 text-xs font-bold bg-lotus-600 text-white rounded-lg shadow-sm">
+            بلاغ سريع
+          </a>
+          
+          <button id="mobile-menu-btn" class="mobile-toggle-btn p-2 rounded-lg bg-slate-100 text-charcoal-900 hover:bg-slate-200 transition-colors focus:outline-none" aria-label="فتح القائمة الرئيسية">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- القائمة المنسدلة للهواتف - تفتح من الجهة اليسرى (Left-aligned Mobile Drawer) -->
+  <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-charcoal-950/80 backdrop-blur-sm md:hidden transition-opacity duration-300">
+    <div id="mobile-menu-drawer" class="fixed top-0 left-0 w-5/6 max-w-sm h-full bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto border-r border-slate-200 transform -translate-x-full transition-transform duration-300 ease-out">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+          <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-lg bg-lotus-600 text-white flex items-center justify-center">
+              <i class="fa-solid fa-paw text-base"></i>
+            </div>
+            <span class="text-base font-bold text-charcoal-900">مأوى القاهرة للكلاب</span>
+          </div>
+          <button id="mobile-menu-close" class="p-2 text-gray-400 hover:text-gray-700 focus:outline-none" aria-label="إغلاق القائمة">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <nav class="mt-6 flex flex-col gap-1.5">
+          <a href="index.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-house text-gray-400 w-5"></i>
+            الرئيسية
+          </a>
+          <a href="index.html#about" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-heart-pulse text-gray-400 w-5"></i>
+            من نحن وخدماتنا
+          </a>
+          <a href="map.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-map-location-dot text-lotus-600 w-5"></i>
+            خريطة العمليات
+          </a>
+          <a href="report.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-truck-medical text-gray-400 w-5"></i>
+            تقديم بلاغ
+          </a>
+          <a href="track.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-magnifying-glass-location text-gray-400 w-5"></i>
+            متابعة بلاغ
+          </a>
+          <a href="help.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-hand-holding-medical text-gray-400 w-5"></i>
+            طلب مساعدة
+          </a>
+          <a href="careers.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-handshake-angle text-gray-400 w-5"></i>
+            التطوع والوظائف
+          </a>
+          <a href="activities.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-shield-dog text-gray-400 w-5"></i>
+            أنشطة المأوى
+          </a>
+          <a href="donate.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-lotus-700 bg-lotus-100/80 transition-colors mt-2">
+            <i class="fa-solid fa-heart text-lotus-600 w-5"></i>
+            تبرع الآن
+          </a>
+        </nav>
+      </div>
+
+      <div class="pt-6 border-t border-gray-100 space-y-3">
+        <a href="admin-login.html" class="w-full py-2.5 px-4 text-xs font-bold text-center text-white bg-charcoal-900 hover:bg-charcoal-800 rounded-lg flex items-center justify-center gap-2">
+          <i class="fa-solid fa-lock text-lotus-400"></i>
+          <span>لوحة الإدارة</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       المحتوى الرئيسي: صفحة التبرع مع التبويبات التفاعلية (Tabs)
+       ====================================================================== -->
+  <main class="pt-28 pb-16 flex-grow">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- رأس الصفحة -->
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lotus-100 border border-lotus-200 text-lotus-800 text-xs font-bold mb-3">
+          <i class="fa-solid fa-hand-holding-dollar text-lotus-600"></i>
+          <span>كل مساهمة تصنع فرقاً حقيقياً في حياة كلب منقذ</span>
+        </div>
+        <h1 class="text-2xl sm:text-4xl font-black text-charcoal-950 tracking-tight">
+          تبرع لدعم مأوى كلاب القاهرة
+        </h1>
+        <p class="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
+          المأوى منظمة أهلية غير ربحية تعتمد بنسبة 100% على عطاء المجتمع. اختر الطريقة الأنسب لك لدعم جهود الإنقاذ والإيواء والتطعيم في شبرامنت وسقارة وطريق مصر إسكندرية الصحراوي.
+        </p>
+      </div>
+
+      <!-- مؤشرات الأثر السريع للتبرع -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center shadow-sm">
+          <span class="block text-lg font-black text-lotus-700">100 ج.م</span>
+          <span class="text-[11px] text-slate-500 font-medium">وجبة غذائية غنية ليوم كامل</span>
+        </div>
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center shadow-sm">
+          <span class="block text-lg font-black text-lotus-700">250 ج.م</span>
+          <span class="text-[11px] text-slate-500 font-medium">جرعة لقاح السعار وفحص بيطري</span>
+        </div>
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center shadow-sm">
+          <span class="block text-lg font-black text-lotus-700">500 ج.م</span>
+          <span class="text-[11px] text-slate-500 font-medium">عملية تعقيم شاملة (TNR)</span>
+        </div>
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center shadow-sm">
+          <span class="block text-lg font-black text-lotus-700">1000 ج.م</span>
+          <span class="text-[11px] text-slate-500 font-medium">إسعاف ورعاية كسر أو حادث سير</span>
+        </div>
+      </div>
+
+      <!-- بطاقة التبويبات الثلاثة -->
+      <div class="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-200/80 overflow-hidden">
+        
+        <!-- أزرار التبويبات (Tabs Header) -->
+        <div class="grid grid-cols-3 border-b border-slate-200 bg-slate-50/70 p-1.5 sm:p-2 gap-1.5">
+          <button 
+            type="button" 
+            id="tab-financial-btn" 
+            class="tab-btn py-3 px-2 sm:px-4 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center gap-2 bg-white text-lotus-700 shadow-sm"
+          >
+            <i class="fa-solid fa-credit-card text-sm"></i>
+            <span>تبرع مالي</span>
+          </button>
+
+          <button 
+            type="button" 
+            id="tab-inkind-btn" 
+            class="tab-btn py-3 px-2 sm:px-4 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center gap-2 text-slate-600 hover:text-charcoal-900"
+          >
+            <i class="fa-solid fa-box-open text-sm"></i>
+            <span>تبرع عيني</span>
+          </button>
+
+          <button 
+            type="button" 
+            id="tab-services-btn" 
+            class="tab-btn py-3 px-2 sm:px-4 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center gap-2 text-slate-600 hover:text-charcoal-900"
+          >
+            <i class="fa-solid fa-hand-holding-hand text-sm"></i>
+            <span>تبرع بالخدمات</span>
+          </button>
+        </div>
+
+        <div class="p-6 sm:p-10">
+
+          <!-- ==========================================
+               التبويب 1: التبرع المالي
+               ========================================== -->
+          <div id="tab-financial-content" class="tab-pane block">
+            <form id="financial-donate-form" class="space-y-6">
+              
+              <!-- اختيار المبلغ -->
+              <div>
+                <label class="block text-sm font-bold text-charcoal-950 mb-3">
+                  اختر مبلغ التبرع (جنيه مصري) <span class="text-rose-500">*</span>
+                </label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
+                  <button type="button" class="amount-btn py-3 px-4 rounded-xl border-2 border-slate-200 hover:border-lotus-400 font-extrabold text-charcoal-800 text-sm transition-all text-center" data-amount="100">
+                    100 ج.م
+                  </button>
+                  <button type="button" class="amount-btn py-3 px-4 rounded-xl border-2 border-slate-200 hover:border-lotus-400 font-extrabold text-charcoal-800 text-sm transition-all text-center" data-amount="250">
+                    250 ج.م
+                  </button>
+                  <button type="button" class="amount-btn py-3 px-4 rounded-xl border-2 border-lotus-600 bg-lotus-50 font-extrabold text-lotus-700 text-sm transition-all text-center" data-amount="500">
+                    500 ج.م
+                  </button>
+                  <button type="button" class="amount-btn py-3 px-4 rounded-xl border-2 border-slate-200 hover:border-lotus-400 font-extrabold text-charcoal-800 text-sm transition-all text-center" data-amount="1000">
+                    1000 ج.م
+                  </button>
+                </div>
+
+                <div class="relative">
+                  <input 
+                    type="number" 
+                    id="custom-amount" 
+                    placeholder="أو اكتب مبلغاً مخصصاً (ج.م)" 
+                    value="500"
+                    min="20"
+                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors"
+                  />
+                  <span class="absolute left-4 top-2.5 text-xs font-bold text-slate-400">EGP</span>
+                </div>
+              </div>
+
+              <!-- وسيلة الدفع -->
+              <div>
+                <label class="block text-sm font-bold text-charcoal-950 mb-3">
+                  طريقة الدفع المناسبة <span class="text-rose-500">*</span>
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <label class="relative flex flex-col items-center p-3.5 rounded-xl border-2 cursor-pointer border-slate-200 hover:border-lotus-400 bg-white text-center">
+                    <input type="radio" name="paymentMethod" value="فودافون كاش ومحافظ المحمول" class="peer sr-only" checked />
+                    <i class="fa-solid fa-mobile-screen-button text-2xl text-rose-600 mb-1.5 peer-checked:text-lotus-600"></i>
+                    <span class="text-xs font-bold text-charcoal-900 peer-checked:text-lotus-700">فودافون كاش والمحافظ</span>
+                    <span class="text-[10px] text-slate-400 mt-0.5">تحويل محفظة إلكترونية</span>
+                    <span class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-lotus-600 pointer-events-none"></span>
+                  </label>
+
+                  <label class="relative flex flex-col items-center p-3.5 rounded-xl border-2 cursor-pointer border-slate-200 hover:border-lotus-400 bg-white text-center">
+                    <input type="radio" name="paymentMethod" value="إنستا باي (InstaPay)" class="peer sr-only" />
+                    <i class="fa-solid fa-bolt text-2xl text-amber-500 mb-1.5 peer-checked:text-lotus-600"></i>
+                    <span class="text-xs font-bold text-charcoal-900 peer-checked:text-lotus-700">إنستا باي (InstaPay)</span>
+                    <span class="text-[10px] text-slate-400 mt-0.5">تحويل لحظي فوري</span>
+                    <span class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-lotus-600 pointer-events-none"></span>
+                  </label>
+
+                  <label class="relative flex flex-col items-center p-3.5 rounded-xl border-2 cursor-pointer border-slate-200 hover:border-lotus-400 bg-white text-center">
+                    <input type="radio" name="paymentMethod" value="بطاقة بنكية (Visa/Mastercard)" class="peer sr-only" />
+                    <i class="fa-brands fa-cc-visa text-2xl text-blue-600 mb-1.5 peer-checked:text-lotus-600"></i>
+                    <span class="text-xs font-bold text-charcoal-900 peer-checked:text-lotus-700">بطاقة بنكية فيزا / ماستر</span>
+                    <span class="text-[10px] text-slate-400 mt-0.5">دفع مباشر آمن</span>
+                    <span class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-lotus-600 pointer-events-none"></span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- تخصيص التبرع -->
+              <div>
+                <label for="donationPurpose" class="block text-xs font-bold text-charcoal-950 mb-1.5">
+                  تخصيص التبرع
+                </label>
+                <select id="donationPurpose" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors">
+                  <option value="الاحتياج الأكثر إلحاحاً بالمأوى">الاحتياج الأكثر إلحاحاً بالمأوى (موصى به)</option>
+                  <option value="برامج التعقيم والتطعيم الوطني (TNR)">برامج التعقيم والتطعيم الوطني (TNR)</option>
+                  <option value="جراحات العظام وإنقاذ حوادث السير">جراحات العظام وإنقاذ حوادث السير</option>
+                  <option value="طعام وتغذية الحظائر الاستشفائية">طعام وتغذية الحظائر الاستشفائية</option>
+                  <option value="أغطية وعزل الحظائر لموسم الشتاء">أغطية وعزل الحظائر لموسم الشتاء</option>
+                </select>
+              </div>
+
+              <!-- بيانات المتبرع -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="donorName" class="block text-xs font-bold text-charcoal-950 mb-1.5">
+                    الاسم (أو اكتب فاعل خير)
+                  </label>
+                  <input type="text" id="donorName" placeholder="فاعل خير" value="فاعل خير" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors" />
+                </div>
+                <div>
+                  <label for="donorPhone" class="block text-xs font-bold text-charcoal-950 mb-1.5">
+                    رقم الهاتف لتأكيد الاستلام
+                  </label>
+                  <input type="tel" id="donorPhone" placeholder="01012345678" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors dir-ltr text-right" />
+                </div>
+              </div>
+
+              <!-- زر إتمام التبرع -->
+              <button 
+                type="submit" 
+                class="w-full py-4 px-6 text-base font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-xl shadow-lg shadow-lotus-900/20 transition-all flex items-center justify-center gap-2"
+              >
+                <i class="fa-solid fa-heart text-base"></i>
+                <span id="donate-submit-text">متابعة التبرع بمبلغ 500 ج.م</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- ==========================================
+               التبويب 2: التبرع العيني (طعام وبطاطين وأدوية)
+               ========================================== -->
+          <div id="tab-inkind-content" class="tab-pane hidden">
+            <form id="inkind-donate-form" class="space-y-6">
+              
+              <div>
+                <label class="block text-sm font-bold text-charcoal-950 mb-3">
+                  نوع التبرع العيني <span class="text-rose-500">*</span>
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  <label class="relative flex flex-col items-center p-3.5 rounded-xl border-2 cursor-pointer border-slate-200 hover:border-lotus-400 bg-white text-center">
+                    <input type="radio" name="inkindCategory" value="طعام جاف ومعلبات (Dry Food)" class="peer sr-only" checked />
+                    <i class="fa-solid fa-bowl-food text-2xl text-amber-600 mb-1.5 peer-checked:text-lotus-600"></i>
+                    <span class="text-xs font-bold text-charcoal-900 peer-checked:text-lotus-700">طعام جاف ومعلبات</span>
+                    <span class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-lotus-600 pointer-events-none"></span>
+                  </label>
+
+                  <label class="relative flex flex-col items-center p-3.5 rounded-xl border-2 cursor-pointer border-slate-200 hover:border-lotus-400 bg-white text-center">
+                    <input type="radio" name="inkindCategory" value="أدوية ومستلزمات بيطرية" class="peer sr-only" />
+                    <i class="fa-solid fa-kit-medical text-2xl text-emerald-600 mb-1.5 peer-checked:text-lotus-600"></i>
+                    <span class="text-xs font-bold text-charcoal-900 peer-checked:text-lotus-700">أدوية وشاش ومطهرات</span>
+                    <span class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-lotus-600 pointer-events-none"></span>
+                  </label>
+
+                  <label class="relative flex flex-col items-center p-3.5 rounded-xl border-2 cursor-pointer border-slate-200 hover:border-lotus-400 bg-white text-center">
+                    <input type="radio" name="inkindCategory" value="بطاطين وأغطية شتوية" class="peer sr-only" />
+                    <i class="fa-solid fa-rug text-2xl text-indigo-600 mb-1.5 peer-checked:text-lotus-600"></i>
+                    <span class="text-xs font-bold text-charcoal-900 peer-checked:text-lotus-700">بطاطين وأغطية</span>
+                    <span class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-lotus-600 pointer-events-none"></span>
+                  </label>
+
+                  <label class="relative flex flex-col items-center p-3.5 rounded-xl border-2 cursor-pointer border-slate-200 hover:border-lotus-400 bg-white text-center">
+                    <input type="radio" name="inkindCategory" value="منظفات ومطهرات للحظائر" class="peer sr-only" />
+                    <i class="fa-solid fa-soap text-2xl text-cyan-600 mb-1.5 peer-checked:text-lotus-600"></i>
+                    <span class="text-xs font-bold text-charcoal-900 peer-checked:text-lotus-700">منظفات ومطهرات</span>
+                    <span class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-lotus-600 pointer-events-none"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="inkindQuantity" class="block text-xs font-bold text-charcoal-950 mb-1.5">
+                    الكمية والوصف التقريبي <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="inkindQuantity" placeholder="مثال: 5 شكائر دراي فود 20 كجم، أو 10 بطاطين صوف" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors" />
+                </div>
+
+                <div>
+                  <label for="inkindDelivery" class="block text-xs font-bold text-charcoal-950 mb-1.5">
+                    طريقة التسليم للمأوى <span class="text-rose-500">*</span>
+                  </label>
+                  <select id="inkindDelivery" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors font-medium">
+                    <option value="تسليم مباشر بمقر مأوى شبرامنت">سأسلمها بنفسي بمقر مأوى شبرامنت</option>
+                    <option value="تسليم بنقطة تجميع المعادي">تسليم بنقطة تجميع المعادي (دجلة)</option>
+                    <option value="طلب إرسال مندوب وسيارة المأوى للاستلام">أطلب إرسال سيارة المأوى للاستلام من عنواني</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="inkindAddress" class="block text-xs font-bold text-charcoal-950 mb-1.5">
+                  عنوانك التفصيلي في القاهرة / الجيزة <span class="text-rose-500">*</span>
+                </label>
+                <input type="text" id="inkindAddress" placeholder="المنطقة والشارع لتنسيق الاستلام أو التأكيد" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors" />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="inkindDonorName" class="block text-xs font-bold text-charcoal-950 mb-1.5">
+                    اسم المتبرع أو الجهة <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="inkindDonorName" placeholder="الاسم الكريم أو اسم الشركة" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors" />
+                </div>
+                <div>
+                  <label for="inkindDonorPhone" class="block text-xs font-bold text-charcoal-950 mb-1.5">
+                    رقم الهاتف للتنسيق <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="tel" id="inkindDonorPhone" placeholder="01012345678" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors dir-ltr text-right" />
+                </div>
+              </div>
+
+              <button type="submit" class="w-full py-4 px-6 text-base font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-xl shadow-lg shadow-lotus-900/20 transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-box-open text-base"></i>
+                <span>تسجيل التبرع العيني وتنسيق الاستلام</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- ==========================================
+               التبويب 3: التبرع بالخدمات والخبرات
+               ========================================== -->
+          <div id="tab-services-content" class="tab-pane hidden">
+            <form id="services-donate-form" class="space-y-6">
+              
+              <div>
+                <label class="block text-sm font-bold text-charcoal-950 mb-3">
+                  مجال الخدمة التي ترغب بتقديمها للمأوى <span class="text-rose-500">*</span>
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <label class="relative flex flex-col items-center p-3.5 rounded-xl border-2 cursor-pointer border-slate-200 hover:border-lotus-400 bg-white text-center">
+                    <input type="radio" name="serviceCategory" value="خدمات طبية وجراحية بيطرية" class="peer sr-only" checked />
+                    <i class="fa-solid fa-user-doctor text-2xl text-lotus-600 mb-1.5"></i>
+                    <span class="text-xs font-bold text-charcoal-900 peer-checked:text-lotus-700">أطباء وعيادات بيطرية</span>
+                    <span class="text-[10px] text-slate-400 mt-0.5">عمليات تعقيم وعلاج مجاني</span>
+                    <span class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-lotus-600 pointer-events-none"></span>
+                  </label>
+
+                  <label class="relative flex flex-col items-center p-3.5 rounded-xl border-2 cursor-pointer border-slate-200 hover:border-lotus-400 bg-white text-center">
+                    <input type="radio" name="serviceCategory" value="نقل وإسعاف الحالات الحرجة" class="peer sr-only" />
+                    <i class="fa-solid fa-truck-pickup text-2xl text-blue-600 mb-1.5"></i>
+                    <span class="text-xs font-bold text-charcoal-900 peer-checked:text-lotus-700">نقل بسيارات خاصة</span>
+                    <span class="text-[10px] text-slate-400 mt-0.5">توصيل حالات للعيادة أو المأوى</span>
+                    <span class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-lotus-600 pointer-events-none"></span>
+                  </label>
+
+                  <label class="relative flex flex-col items-center p-3.5 rounded-xl border-2 cursor-pointer border-slate-200 hover:border-lotus-400 bg-white text-center">
+                    <input type="radio" name="serviceCategory" value="تصوير وإعلام وصناعة محتوى" class="peer sr-only" />
+                    <i class="fa-solid fa-video text-2xl text-emerald-600 mb-1.5"></i>
+                    <span class="text-xs font-bold text-charcoal-900 peer-checked:text-lotus-700">إعلام وتصوير وتسويق</span>
+                    <span class="text-[10px] text-slate-400 mt-0.5">تصوير الكلاب لحملات التبني</span>
+                    <span class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-lotus-600 pointer-events-none"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label for="serviceDetails" class="block text-xs font-bold text-charcoal-950 mb-1.5">
+                  تفاصيل الخدمة التي يمكنك تقديمها وعدد الساعات أو الحالات شهرياً <span class="text-rose-500">*</span>
+                </label>
+                <textarea id="serviceDetails" rows="3" placeholder="مثال: عيادتنا في التجمع مستعدة لإجراء 5 عمليات تعقيم مجاناً شهرياً لحالات المأوى، وتوفير كشف مخفض..." required class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors"></textarea>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="serviceProviderName" class="block text-xs font-bold text-charcoal-950 mb-1.5">
+                    الاسم أو اسم العيادة / الكيان <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="serviceProviderName" placeholder="د. أحمد زكي / عيادة كير فيت" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors" />
+                </div>
+                <div>
+                  <label for="serviceProviderPhone" class="block text-xs font-bold text-charcoal-950 mb-1.5">
+                    رقم الهاتف للتواصل <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="tel" id="serviceProviderPhone" placeholder="01012345678" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white transition-colors dir-ltr text-right" />
+                </div>
+              </div>
+
+              <button type="submit" class="w-full py-4 px-6 text-base font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-xl shadow-lg shadow-lotus-900/20 transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-handshake text-base"></i>
+                <span>تسجيل عرض الشراكة والخدمة التطوعية</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- نافذة محاكاة الدفع وتأكيد التبرع المالي (Financial Donation Modal) -->
+  <div id="financial-confirm-modal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal-950/70 backdrop-blur-sm">
+    <div class="modal-content bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-100 p-6 sm:p-8 text-center">
+      <div class="w-16 h-16 rounded-full bg-lotus-100 text-lotus-600 flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-heart text-3xl"></i>
+      </div>
+      <h3 class="text-xl font-black text-charcoal-950 mb-1">شكراً لعطائك الإنساني الكريم</h3>
+      <p class="text-xs text-slate-500 mb-5">تفاصيل تحويل التبرع لحساب المأوى الرسمي:</p>
+
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-5 text-right space-y-2.5 text-xs">
+        <div class="flex justify-between border-b border-slate-200 pb-2">
+          <span class="text-slate-500">المبلغ المقرر:</span>
+          <span id="modal-amount-display" class="font-extrabold text-lotus-700 text-sm">500 جنيه مصري</span>
+        </div>
+        <div class="flex justify-between border-b border-slate-200 pb-2">
+          <span class="text-slate-500">طريقة التحويل:</span>
+          <span id="modal-method-display" class="font-bold text-charcoal-900">إنستا باي (InstaPay)</span>
+        </div>
+        <div class="flex justify-between items-center pt-1">
+          <span class="text-slate-500">الحساب المعتمد:</span>
+          <span class="font-mono font-bold text-lotus-800 bg-white px-2 py-0.5 rounded border border-slate-200 text-xs dir-ltr">cairoshelter@instapay</span>
+        </div>
+        <p class="text-[10px] text-slate-400 text-center pt-1">رقم فودافون كاش للمأوى: <strong>01099887766</strong></p>
+      </div>
+
+      <div class="bg-emerald-50 text-emerald-800 text-[11px] p-2.5 rounded-lg mb-6 border border-emerald-200">
+        تم توثيق هذا التبرع وتوليد الإيصال المرجعي في قاعدة البيانات المحلية.
+      </div>
+
+      <button type="button" id="close-donation-modal-btn" class="w-full py-2.5 px-4 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-xl shadow-sm transition-colors">
+        تم التحويل بنجاح، شكراً لكم
+      </button>
+    </div>
+  </div>
+
+  <!-- تذييل الصفحة الموحد -->
+  <footer class="bg-charcoal-950 text-white pt-12 pb-8 border-t border-white/10 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-400">
+      <p>النظام الرقمي لإدارة مأوى الكلاب الضالة بالقاهرة © 2025 - جميع الحقوق محفوظة لفرق الإنقاذ والرعاية الإنسانية.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // إدارة التبويبات الثلاثة
+      const tabFinancialBtn = document.getElementById('tab-financial-btn');
+      const tabInkindBtn = document.getElementById('tab-inkind-btn');
+      const tabServicesBtn = document.getElementById('tab-services-btn');
+
+      const contentFinancial = document.getElementById('tab-financial-content');
+      const contentInkind = document.getElementById('tab-inkind-content');
+      const contentServices = document.getElementById('tab-services-content');
+
+      const tabs = [
+        { btn: tabFinancialBtn, content: contentFinancial },
+        { btn: tabInkindBtn, content: contentInkind },
+        { btn: tabServicesBtn, content: contentServices },
+      ];
+
+      tabs.forEach(({ btn, content }) => {
+        btn.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.btn.className = 'tab-btn py-3 px-2 sm:px-4 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center gap-2 text-slate-600 hover:text-charcoal-900';
+            t.content.classList.add('hidden');
+            t.content.classList.remove('block');
+          });
+
+          btn.className = 'tab-btn py-3 px-2 sm:px-4 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center gap-2 bg-white text-lotus-700 shadow-sm';
+          content.classList.remove('hidden');
+          content.classList.add('block');
+        });
+      });
+
+      // اختيار المبالغ الجاهزة
+      const amountBtns = document.querySelectorAll('.amount-btn');
+      const customAmountInput = document.getElementById('custom-amount');
+      const donateSubmitText = document.getElementById('donate-submit-text');
+
+      amountBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          amountBtns.forEach(b => {
+            b.className = 'amount-btn py-3 px-4 rounded-xl border-2 border-slate-200 hover:border-lotus-400 font-extrabold text-charcoal-800 text-sm transition-all text-center';
+          });
+          btn.className = 'amount-btn py-3 px-4 rounded-xl border-2 border-lotus-600 bg-lotus-50 font-extrabold text-lotus-700 text-sm transition-all text-center';
+          const amt = btn.dataset.amount;
+          customAmountInput.value = amt;
+          donateSubmitText.textContent = `متابعة التبرع بمبلغ ${amt} ج.م`;
+        });
+      });
+
+      customAmountInput.addEventListener('input', (e) => {
+        const val = e.target.value || 0;
+        donateSubmitText.textContent = `متابعة التبرع بمبلغ ${val} ج.م`;
+      });
+
+      // إرسال التبرع المالي
+      const financialForm = document.getElementById('financial-donate-form');
+      const confirmModal = document.getElementById('financial-confirm-modal');
+      const modalAmountDisplay = document.getElementById('modal-amount-display');
+      const modalMethodDisplay = document.getElementById('modal-method-display');
+      const closeModalBtn = document.getElementById('close-donation-modal-btn');
+
+      if (financialForm) {
+        financialForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const amount = parseFloat(customAmountInput.value) || 100;
+          const methodInput = document.querySelector('input[name="paymentMethod"]:checked');
+          const method = methodInput ? methodInput.value : 'إنستا باي (InstaPay)';
+          const donorName = document.getElementById('donorName').value.trim() || 'فاعل خير';
+          const donorPhone = document.getElementById('donorPhone').value.trim();
+          const purpose = document.getElementById('donationPurpose').value;
+
+          const donation = window.ShelterDB.createDonation({
+            type: 'مالي',
+            amount,
+            currency: 'EGP',
+            donorName,
+            donorPhone,
+            paymentMethod: method,
+            purpose
+          });
+
+          if (modalAmountDisplay) modalAmountDisplay.textContent = `${amount} جنيه مصري`;
+          if (modalMethodDisplay) modalMethodDisplay.textContent = method;
+          if (confirmModal) confirmModal.classList.add('open');
+        });
+      }
+
+      // إرسال التبرع العيني
+      const inkindForm = document.getElementById('inkind-donate-form');
+      if (inkindForm) {
+        inkindForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const cat = document.querySelector('input[name="inkindCategory"]:checked')?.value || 'طعام جاف';
+          const donation = window.ShelterDB.createDonation({
+            type: 'عيني',
+            category: cat,
+            quantity: document.getElementById('inkindQuantity').value.trim(),
+            delivery: document.getElementById('inkindDelivery').value,
+            address: document.getElementById('inkindAddress').value.trim(),
+            donorName: document.getElementById('inkindDonorName').value.trim(),
+            donorPhone: document.getElementById('inkindDonorPhone').value.trim()
+          });
+
+          alert(`شكراً جزيلاً! تم تسجيل تبرعك العيني بالرقم المرجعي (${donation.id}) وسيتواصل معك فريق العلاقات اللوجستية لتنسيق الاستلام.`);
+          inkindForm.reset();
+        });
+      }
+
+      // إرسال التبرع بالخدمات
+      const servicesForm = document.getElementById('services-donate-form');
+      if (servicesForm) {
+        servicesForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const cat = document.querySelector('input[name="serviceCategory"]:checked')?.value || 'خدمات بيطرية';
+          const donation = window.ShelterDB.createDonation({
+            type: 'خدمات',
+            category: cat,
+            details: document.getElementById('serviceDetails').value.trim(),
+            providerName: document.getElementById('serviceProviderName').value.trim(),
+            providerPhone: document.getElementById('serviceProviderPhone').value.trim()
+          });
+
+          alert(`نقدر دعمك وخبرتك المهنية! تم توثيق عرض الخدمة بالرقم (${donation.id}) وسيقوم مدير المأوى بالتواصل معك لتنسيق بروتوكول التعاون.`);
+          servicesForm.reset();
+        });
+      }
+
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => {
+          if (confirmModal) confirmModal.classList.remove('open');
+          window.location.reload();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -85,44 +85,44 @@
           </div>
         </a>
 
-        <!-- روابط التنقل الرئيسية (سطح المكتب وأجهزة الكمبيوتر واللابتوب) -->
-        <nav class="hidden lg:flex items-center gap-2.5 xl:gap-5 text-xs xl:text-sm font-semibold">
-          <a href="#hero" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">الرئيسية</a>
-          <a href="#" data-modal-target="report-modal" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap flex items-center gap-1.5 px-1 py-1">
-            <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
-            تقديم بلاغ
-          </a>
-          <a href="#" data-modal-target="track-modal" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">متابعة بلاغ</a>
-          <a href="#map-section" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1 flex items-center gap-1">
+        <!-- روابط التنقل الرئيسية (سطح المكتب وأجهزة الكمبيوتر واللابتوب) بالترتيب المنطقي الموحد -->
+        <nav class="hidden md:flex items-center gap-1.5 lg:gap-2 xl:gap-3.5 text-xs xl:text-sm font-semibold">
+          <a href="index.html" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">الرئيسية</a>
+          <a href="index.html#about" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">من نحن</a>
+          <a href="map.html" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1 flex items-center gap-1">
             <i class="fa-solid fa-map-location-dot text-[11px] text-lotus-300"></i>
             خريطة العمليات
           </a>
-          <a href="#about" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">من نحن</a>
-          <a href="#services" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">خدمات المأوى</a>
-          <a href="#" data-modal-target="volunteer-modal" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">التطوع والوظائف</a>
-          <a href="#" data-modal-target="activities-modal" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">أنشطة المأوى</a>
+          <a href="report.html" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap flex items-center gap-1.5 px-1 py-1">
+            <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+            تقديم بلاغ
+          </a>
+          <a href="track.html" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">متابعة بلاغ</a>
+          <a href="help.html" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">طلب مساعدة</a>
+          <a href="careers.html" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">التطوع والوظائف</a>
+          <a href="activities.html" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap px-1 py-1">أنشطة المأوى</a>
         </nav>
 
         <!-- منطقة الإجراءات وزر لوحة الإدارة -->
         <div class="hidden sm:flex items-center gap-2 xl:gap-3 shrink-0">
-          <!-- زر التبرع السريع -->
-          <button data-modal-target="donate-modal" class="px-3.5 py-2 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-1.5 xl:gap-2 whitespace-nowrap">
+          <!-- زر التبرع السريع البارز بلون اللوتس -->
+          <a href="donate.html" class="px-3 py-1.5 xl:px-3.5 xl:py-2 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-1.5 xl:gap-2 whitespace-nowrap">
             <i class="fa-solid fa-heart text-xs"></i>
             <span>تبرع الآن</span>
-          </button>
+          </a>
 
-          <!-- زر لوحة الإدارة البارز -->
-          <button data-modal-target="admin-modal" class="px-3.5 py-2 text-xs font-bold text-charcoal-950 bg-white/90 hover:bg-white border border-white/40 hover:border-white rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-1.5 xl:gap-2 whitespace-nowrap">
+          <!-- زر لوحة الإدارة الأنيق باللون الأبيض/الأسود -->
+          <a href="admin-login.html" class="px-3 py-1.5 xl:px-3.5 xl:py-2 text-xs font-bold text-charcoal-950 bg-white/95 hover:bg-white border border-white/40 hover:border-white rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-1.5 xl:gap-2 whitespace-nowrap">
             <i class="fa-solid fa-lock text-xs text-lotus-700"></i>
             <span>لوحة الإدارة</span>
-          </button>
+          </a>
         </div>
 
         <!-- زر القائمة للهواتف والشاشات الصغيرة فقط (Hamburger Button) -->
-        <div class="flex items-center gap-2 lg:hidden">
-          <button data-modal-target="report-modal" class="sm:hidden px-3 py-1.5 text-xs font-bold bg-lotus-600 text-white rounded-lg shadow-sm">
+        <div class="flex items-center gap-2 md:hidden">
+          <a href="report.html" class="sm:hidden px-2.5 py-1 text-xs font-bold bg-lotus-600 text-white rounded-lg shadow-sm">
             بلاغ سريع
-          </button>
+          </a>
           
           <button id="mobile-menu-btn" class="mobile-toggle-btn p-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors focus:outline-none" aria-label="فتح القائمة الرئيسية">
             <i class="fa-solid fa-bars text-xl"></i>
@@ -134,7 +134,7 @@
   </header>
 
   <!-- القائمة المنسدلة للهواتف والشاشات الصغيرة (Left-aligned Mobile Drawer) -->
-  <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-charcoal-950/80 backdrop-blur-sm lg:hidden transition-opacity duration-300">
+  <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-charcoal-950/80 backdrop-blur-sm md:hidden transition-opacity duration-300">
     <div id="mobile-menu-drawer" class="fixed top-0 left-0 w-5/6 max-w-sm h-full bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto border-r border-slate-200 transform -translate-x-full transition-transform duration-300 ease-out">
       <div>
         <div class="flex items-center justify-between pb-4 border-b border-gray-100">
@@ -149,51 +149,51 @@
           </button>
         </div>
 
-        <nav class="mt-6 flex flex-col gap-2">
-          <a href="#hero" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+        <nav class="mt-6 flex flex-col gap-1.5">
+          <a href="index.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
             <i class="fa-solid fa-house text-gray-400 w-5"></i>
             الرئيسية
           </a>
-          <a href="#" data-modal-target="report-modal" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-rose-600 hover:bg-rose-50 transition-colors">
-            <i class="fa-solid fa-truck-medical text-rose-500 w-5"></i>
-            تقديم بلاغ سريع
-          </a>
-          <a href="#" data-modal-target="track-modal" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
-            <i class="fa-solid fa-magnifying-glass-location text-gray-400 w-5"></i>
-            متابعة حالة بلاغ
-          </a>
-          <a href="#map-section" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
-            <i class="fa-solid fa-map-location-dot text-lotus-600 w-5"></i>
-            خريطة العمليات والبلاغات الحية
-          </a>
-          <a href="#about" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+          <a href="index.html#about" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
             <i class="fa-solid fa-heart-pulse text-gray-400 w-5"></i>
-            من نحن ورسالتنا
+            من نحن وخدماتنا
           </a>
-          <a href="#services" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
-            <i class="fa-solid fa-stethoscope text-gray-400 w-5"></i>
-            خدمات المأوى
+          <a href="map.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-map-location-dot text-lotus-600 w-5"></i>
+            خريطة العمليات
           </a>
-          <a href="#" data-modal-target="volunteer-modal" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+          <a href="report.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-rose-600 hover:bg-rose-50 transition-colors">
+            <i class="fa-solid fa-truck-medical text-rose-500 w-5"></i>
+            تقديم بلاغ
+          </a>
+          <a href="track.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-magnifying-glass-location text-gray-400 w-5"></i>
+            متابعة بلاغ
+          </a>
+          <a href="help.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-hand-holding-medical text-gray-400 w-5"></i>
+            طلب مساعدة
+          </a>
+          <a href="careers.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
             <i class="fa-solid fa-handshake-angle text-gray-400 w-5"></i>
             التطوع والوظائف
           </a>
-          <a href="#" data-modal-target="activities-modal" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+          <a href="activities.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
             <i class="fa-solid fa-shield-dog text-gray-400 w-5"></i>
-            أنشطة المأوى الميدانية
+            أنشطة المأوى
           </a>
-          <a href="#" data-modal-target="donate-modal" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-lotus-700 bg-lotus-50 hover:bg-lotus-100 transition-colors mt-2">
-            <i class="fa-solid fa-hand-holding-dollar text-lotus-600 w-5"></i>
-            تبرع الآن لدعم الإنقاذ
+          <a href="donate.html" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-lotus-700 bg-lotus-50 hover:bg-lotus-100 transition-colors mt-2">
+            <i class="fa-solid fa-heart text-lotus-600 w-5"></i>
+            تبرع الآن
           </a>
         </nav>
       </div>
 
       <div class="pt-6 border-t border-gray-100 space-y-3">
-        <button data-modal-target="admin-modal" class="w-full py-2.5 px-4 text-xs font-bold text-center text-white bg-charcoal-900 hover:bg-charcoal-800 rounded-lg flex items-center justify-center gap-2">
+        <a href="admin-login.html" class="w-full py-2.5 px-4 text-xs font-bold text-center text-white bg-charcoal-900 hover:bg-charcoal-800 rounded-lg flex items-center justify-center gap-2">
           <i class="fa-solid fa-lock text-lotus-400"></i>
-          <span>لوحة إدارة النظام</span>
-        </button>
+          <span>لوحة الإدارة</span>
+        </a>
         <div class="text-center">
           <p class="text-xs text-gray-400">الخط الساخن للبلاغات العاجلة 24/7</p>
           <a href="tel:19875" class="text-sm font-bold text-lotus-700 mt-0.5 inline-block dir-ltr">19875</a>
@@ -637,147 +637,63 @@
 
 
   <!-- ======================================================================
-       5.5 قسم خريطة العمليات التفاعلية وبلاغات القاهرة (Live Interactive Operations Map)
+       5.5 قسم استعراض خريطة العمليات والانتشار الميداني (Operations Map Teaser)
        ====================================================================== -->
-  <section id="map-section" class="py-24 bg-white relative border-b border-slate-200">
+  <section class="py-20 bg-slate-50 relative border-b border-slate-200 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- رأس قسم الخريطة التفاعلية -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-        <div class="max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-lotus-50 border border-lotus-200 text-lotus-800 text-xs font-bold mb-3">
-            <i class="fa-solid fa-map-location-dot text-lotus-600"></i>
-            <span>الرصد الميداني اللحظي · خريطة نطاق القاهرة الكبرى والجيزة</span>
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-charcoal-900 leading-tight">
-            خريطة العمليات الميدانية وبلاغات الإنقاذ الحية
-          </h2>
-          <p class="text-sm sm:text-base text-slate-600 mt-2">
-            تابع تحركات سيارات الإسعاف البيطري، مواقع البلاغات العاجلة، وحملات التعقيم والتطعيم (TNR) الجارية لحظياً. انقر على أي موقع للانتقال إليه واستعراض تفاصيل الحالة.
-          </p>
-        </div>
-
-        <!-- شريط المؤشرات الحية السريعة والتحكم -->
-        <div class="flex flex-wrap items-center gap-3">
-          <div class="flex items-center gap-2 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3.5 py-2 rounded-xl text-xs font-bold">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-            <span>8 مناطق تدخل نشطة الآن</span>
-          </div>
-          <button id="map-recenter-btn" class="px-3.5 py-2 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors flex items-center gap-2 shadow-sm" title="إعادة ضبط زاوية الرؤية على القاهرة">
-            <i class="fa-solid fa-crosshairs text-lotus-600"></i>
-            <span>إعادة ضبط العرض</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- شريط التصفية والتصنيف والبحث -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 p-3.5 bg-slate-50 border border-slate-200 rounded-2xl">
-        <!-- أزرار التصنيف التفاعلية -->
-        <div class="flex flex-wrap items-center gap-1.5" id="map-filter-buttons">
-          <button data-filter="all" class="map-filter-btn active px-3.5 py-1.5 text-xs font-bold rounded-lg transition-colors bg-lotus-600 text-white shadow-sm">
-            الكل (8)
-          </button>
-          <button data-filter="emergency" class="map-filter-btn px-3.5 py-1.5 text-xs font-bold rounded-lg transition-colors bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
-            <i class="fa-solid fa-truck-medical text-rose-500 ml-1"></i>
-            طوارئ جارية (3)
-          </button>
-          <button data-filter="tnr" class="map-filter-btn px-3.5 py-1.5 text-xs font-bold rounded-lg transition-colors bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
-            <i class="fa-solid fa-syringe text-lotus-600 ml-1"></i>
-            حملات TNR (2)
-          </button>
-          <button data-filter="shelter" class="map-filter-btn px-3.5 py-1.5 text-xs font-bold rounded-lg transition-colors bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
-            <i class="fa-solid fa-shield-dog text-charcoal-900 ml-1"></i>
-            ملاذات المأوى (2)
-          </button>
-          <button data-filter="clinic" class="map-filter-btn px-3.5 py-1.5 text-xs font-bold rounded-lg transition-colors bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
-            <i class="fa-solid fa-stethoscope text-teal-600 ml-1"></i>
-            عيادات متنقلة (1)
-          </button>
-        </div>
-
-        <!-- حقل البحث بالأحياء -->
-        <div class="relative min-w-[220px]">
-          <input 
-            type="text" 
-            id="map-search-input" 
-            placeholder="ابحث بالحي (المعادي، سقارة، التجمع...)" 
-            class="w-full text-xs px-3.5 py-2 pl-8 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lotus-500 bg-white"
-          />
-          <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-        </div>
-      </div>
-
-      <!-- شبكة الخريطة والقائمة الجانبية للمواقع النشطة -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <div class="bg-charcoal-950 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-2xl border border-charcoal-800">
         
-        <!-- القائمة الجانبية للمواقع وسجل العمليات (4 أعمدة) -->
-        <div class="lg:col-span-4 flex flex-col">
-          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex-1 flex flex-col max-h-[580px]">
-            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-200">
-              <div class="flex items-center gap-2">
-                <i class="fa-solid fa-list-check text-xs text-lotus-600"></i>
-                <h3 class="text-xs font-bold text-slate-800">قائمة العمليات والملاذات</h3>
-              </div>
-              <span id="filtered-count-badge" class="text-[11px] font-semibold text-lotus-700 bg-lotus-100/70 px-2 py-0.5 rounded-full">8 مواقع</span>
-            </div>
-            
-            <!-- قائمة البطاقات التفاعلية القابلة للنقر والتمرير -->
-            <div id="map-zones-container" class="space-y-2.5 overflow-y-auto flex-1 pr-1">
-              <!-- يتم توليد البطاقات ديناميكياً من script.js -->
-            </div>
+        <!-- خلفية تزيينية بنمط دوائر خريطة وإشعاع لوتس -->
+        <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-lotus-600/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-emerald-600/10 blur-3xl pointer-events-none"></div>
 
-            <!-- إشعار تحديث البيانات اللحظي -->
-            <div class="mt-3 pt-2.5 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-500">
-              <span class="flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>تحديث البث: لحظي</span>
-              </span>
-              <button data-modal-target="report-modal" class="text-lotus-700 font-bold hover:underline">
-                + إضافة بلاغ جديد
-              </button>
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-lotus-300 text-xs font-bold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>خريطة الرصد المباشر والانتشار الميداني</span>
+            </div>
+            <h2 class="text-2xl sm:text-4xl font-black text-white leading-tight">
+              خريطة العمليات والبلاغات الحية بالقاهرة الكبرى
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+              تصفح التوزيع الجغرافي الحي لسيارات الإسعاف البيطري، مواقع البلاغات الطارئة، ملاذات شبرامنت وسقارة، وحملات التعقيم والتطعيم (TNR) عبر صفحة الخريطة التفاعلية الموسعة.
+            </p>
+            
+            <div class="pt-2 flex flex-wrap items-center gap-4">
+              <a href="map.html" class="px-6 py-3.5 text-xs sm:text-sm font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-xl shadow-lg shadow-lotus-900/40 transition-all duration-200 flex items-center gap-2">
+                <i class="fa-solid fa-map-location-dot text-sm"></i>
+                <span>فتح خريطة العمليات الموسعة</span>
+                <i class="fa-solid fa-arrow-left text-xs mr-1"></i>
+              </a>
+              <a href="report.html" class="px-5 py-3.5 text-xs sm:text-sm font-bold text-slate-200 hover:text-white bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl transition-all duration-200 flex items-center gap-2">
+                <i class="fa-solid fa-truck-medical text-rose-400 text-xs"></i>
+                <span>تقديم بلاغ عن حالة جديدة</span>
+              </a>
             </div>
           </div>
-        </div>
 
-        <!-- حاوية خريطة Leaflet (8 أعمدة) -->
-        <div class="lg:col-span-8 relative">
-          <div class="relative w-full h-[580px] rounded-2xl overflow-hidden border border-slate-200 shadow-md">
-            <div id="cairo-operations-map" class="w-full h-full"></div>
-            
-            <!-- وسيلة إيضاح الخريطة العائمة (Floating Map Legend) -->
-            <div class="absolute bottom-4 right-4 z-[400] bg-white/95 backdrop-blur-md p-3.5 rounded-xl border border-slate-200 shadow-lg text-xs space-y-2 hidden sm:block">
-              <span class="font-bold text-charcoal-900 block border-b border-slate-100 pb-1">دليل الرموز الميدانية:</span>
-              <div class="flex items-center gap-2 text-slate-700">
-                <span class="w-3.5 h-3.5 rounded-full bg-rose-600 inline-flex items-center justify-center text-[8px] text-white shadow-sm">
-                  <i class="fa-solid fa-truck-medical"></i>
-                </span>
-                <span>بلاغ طوارئ / إنقاذ جاري</span>
-              </div>
-              <div class="flex items-center gap-2 text-slate-700">
-                <span class="w-3.5 h-3.5 rounded-full bg-lotus-500 inline-flex items-center justify-center text-[8px] text-white shadow-sm">
-                  <i class="fa-solid fa-syringe"></i>
-                </span>
-                <span>حملة تعقيم وتطعيم (TNR)</span>
-              </div>
-              <div class="flex items-center gap-2 text-slate-700">
-                <span class="w-3.5 h-3.5 rounded-full bg-charcoal-900 inline-flex items-center justify-center text-[8px] text-white shadow-sm">
-                  <i class="fa-solid fa-shield-dog"></i>
-                </span>
-                <span>ملاذ أو مقر إيواء رئيسي</span>
-              </div>
-              <div class="flex items-center gap-2 text-slate-700">
-                <span class="w-3.5 h-3.5 rounded-full bg-teal-600 inline-flex items-center justify-center text-[8px] text-white shadow-sm">
-                  <i class="fa-solid fa-stethoscope"></i>
-                </span>
-                <span>عيادة بيطرية متنقلة</span>
-              </div>
+          <div class="lg:col-span-5 grid grid-cols-2 gap-3.5 text-center">
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div class="text-2xl font-black text-white mb-1">8 مناطق</div>
+              <div class="text-xs text-slate-400">تدخل نشطة لحظياً</div>
             </div>
-
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div class="text-2xl font-black text-rose-400 mb-1">4 سيارات</div>
+              <div class="text-xs text-slate-400">إسعاف بيطري تجوب الشوارع</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div class="text-2xl font-black text-lotus-300 mb-1">2 ملاذ</div>
+              <div class="text-xs text-slate-400">شبرامنت والصحراوي</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div class="text-2xl font-black text-emerald-400 mb-1">2 حملة TNR</div>
+              <div class="text-xs text-slate-400">بالتجمع والشيخ زايد</div>
+            </div>
           </div>
         </div>
 
       </div>
-
     </div>
   </section>
   <footer class="bg-charcoal-950 text-slate-300 border-t border-charcoal-800 pt-16 pb-12">
@@ -1299,7 +1215,8 @@
     </div>
   </div>
 
-  <!-- JavaScript الرئيسي -->
+  <!-- قاعدة البيانات والتخزين المحلي والـ JavaScript الرئيسي -->
+  <script src="js/db.js"></script>
   <script src="js/script.js"></script>
 
 </body>

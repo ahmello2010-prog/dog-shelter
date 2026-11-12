@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إدارة البلاغات الميدانية وتحديث الحالات | مأوى القاهرة للكلاب</title>
+
+  <!-- Google Fonts: Cairo & Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            lotus: {
+              50: '#FDF2F4',
+              100: '#FCE7EC',
+              200: '#F8D0DB',
+              300: '#F2AEC1',
+              400: '#E88CA6',
+              500: '#D9829B',
+              600: '#C76B85',
+              700: '#B85875',
+              800: '#9E425E',
+              900: '#83394E',
+            },
+            charcoal: {
+              700: '#334155',
+              800: '#1E293B',
+              900: '#111827',
+              950: '#0F172A',
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-slate-100 text-charcoal-900 font-cairo antialiased min-h-screen flex flex-col md:flex-row">
+
+  <!-- ======================================================================
+       الشريط الجانبي للوحة الإدارة
+       ====================================================================== -->
+  <aside id="admin-sidebar" class="w-full md:w-64 bg-charcoal-950 text-white shrink-0 flex flex-col justify-between border-l border-white/10 z-40">
+    <div>
+      <div class="p-5 border-b border-white/10 flex items-center justify-between">
+        <a href="admin-dashboard.html" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-lotus-600 text-white flex items-center justify-center shadow">
+            <i class="fa-solid fa-paw text-lg"></i>
+          </div>
+          <div>
+            <span class="block text-sm font-extrabold text-white">إدارة مأوى القاهرة</span>
+            <span class="block text-[10px] text-lotus-300 font-semibold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              غرفة العمليات نشطة
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <nav class="p-3 space-y-1 text-xs font-semibold">
+        <a href="admin-dashboard.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <i class="fa-solid fa-chart-pie w-4 text-center"></i>
+          <span>لوحة التحكم الرئيسية</span>
+        </a>
+
+        <a href="admin-reports.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-lotus-600 text-white shadow-sm">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-clipboard-list w-4 text-center"></i>
+            <span>إدارة البلاغات</span>
+          </div>
+          <span id="sidebar-reports-count" class="px-2 py-0.5 rounded-full text-[10px] bg-lotus-900 text-white">4</span>
+        </a>
+
+        <a href="admin-help.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-hand-holding-medical w-4 text-center text-emerald-400"></i>
+            <span>طلبات المساعدة</span>
+          </div>
+          <span id="sidebar-help-count" class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-950 text-emerald-300">3</span>
+        </a>
+
+        <a href="admin-donations.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-heart w-4 text-center text-rose-400"></i>
+            <span>التبرعات الواردة</span>
+          </div>
+          <span id="sidebar-donations-count" class="px-2 py-0.5 rounded-full text-[10px] bg-rose-950 text-rose-300">4</span>
+        </a>
+
+        <a href="admin-careers.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-handshake-angle w-4 text-center text-amber-400"></i>
+            <span>التطوع والتوظيف</span>
+          </div>
+          <span id="sidebar-careers-count" class="px-2 py-0.5 rounded-full text-[10px] bg-amber-950 text-amber-300">3</span>
+        </a>
+
+        <a href="admin-activities.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <i class="fa-solid fa-newspaper w-4 text-center text-cyan-400"></i>
+          <span>الأنشطة والأخبار</span>
+        </a>
+
+        <a href="admin-users.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <i class="fa-solid fa-users-gear w-4 text-center text-indigo-400"></i>
+          <span>المستخدمين والصلاحيات</span>
+        </a>
+
+        <div class="pt-4 border-t border-white/10 mt-4">
+          <a href="map.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+            <i class="fa-solid fa-map-location-dot w-4 text-center text-lotus-400"></i>
+            <span>خريطة العمليات الميدانية</span>
+          </a>
+          <a href="index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:bg-white/5 hover:text-white transition-colors">
+            <i class="fa-solid fa-arrow-up-right-from-square w-4 text-center"></i>
+            <span>بوابة المواطنين العامة</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-white/10 bg-black/20">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-lotus-700 text-white font-bold flex items-center justify-center text-xs">
+            ط.س
+          </div>
+          <div>
+            <span class="block text-xs font-bold text-white">د. طارق سامي</span>
+            <span class="block text-[10px] text-slate-400">مشرف العمليات</span>
+          </div>
+        </div>
+        <button type="button" id="admin-logout-btn" class="p-1.5 text-slate-400 hover:text-rose-400 transition-colors" title="تسجيل الخروج">
+          <i class="fa-solid fa-power-off text-sm"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================
+       مساحة إدارة البلاغات الرئيسية
+       ====================================================================== -->
+  <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+    
+    <!-- شريط الإدارة العلوي -->
+    <header class="bg-white border-b border-slate-200 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sticky top-0 z-30 shadow-sm">
+      <div class="flex items-center gap-3">
+        <h1 class="text-lg font-black text-charcoal-950">إدارة البلاغات وحالات الإنقاذ</h1>
+        <span id="reports-total-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-lotus-100 text-lotus-800">
+          4 بلاغات
+        </span>
+      </div>
+
+      <!-- البحث السريع في البلاغات -->
+      <div class="flex items-center gap-3">
+        <div class="relative w-full sm:w-64">
+          <input 
+            type="text" 
+            id="reports-search-input" 
+            placeholder="ابحث بالكود، المنطقة، أو المبلغ..." 
+            class="w-full px-3.5 py-2 pl-9 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-lotus-400 focus:bg-white"
+          />
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+        </div>
+        <a href="report.html" target="_blank" class="px-3 py-2 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-xl transition-colors shrink-0 flex items-center gap-1.5">
+          <i class="fa-solid fa-plus"></i>
+          <span>بلاغ جديد</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="p-6 space-y-6">
+
+      <!-- أزرار فلترة الحالات السبع المعتمدة -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+        <button type="button" class="status-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-lotus-600 text-white shadow-sm" data-status="الكل">
+          جميع البلاغات (<span id="count-all">0</span>)
+        </button>
+        <button type="button" class="status-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-white border border-slate-300 text-slate-700 hover:border-lotus-400" data-status="جديد">
+          جديد (<span id="count-new">0</span>)
+        </button>
+        <button type="button" class="status-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-white border border-slate-300 text-slate-700 hover:border-lotus-400" data-status="قيد المراجعة">
+          قيد المراجعة (<span id="count-review">0</span>)
+        </button>
+        <button type="button" class="status-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-white border border-slate-300 text-slate-700 hover:border-lotus-400" data-status="تم التواصل مع المبلغ">
+          تم التواصل (<span id="count-contacted">0</span>)
+        </button>
+        <button type="button" class="status-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-white border border-slate-300 text-slate-700 hover:border-lotus-400" data-status="تمت المعاينة">
+          تمت المعاينة (<span id="count-assessed">0</span>)
+        </button>
+        <button type="button" class="status-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-white border border-slate-300 text-slate-700 hover:border-lotus-400" data-status="تم تحويله لفريق الاستجابة">
+          فريق الاستجابة (<span id="count-dispatched">0</span>)
+        </button>
+        <button type="button" class="status-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-white border border-slate-300 text-slate-700 hover:border-lotus-400" data-status="تم التعامل مع الحالة">
+          تم التعامل (<span id="count-resolved">0</span>)
+        </button>
+        <button type="button" class="status-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-white border border-slate-300 text-slate-700 hover:border-lotus-400" data-status="تعذر التعامل مع البلاغ">
+          تعذر التعامل (<span id="count-unreachable">0</span>)
+        </button>
+      </div>
+
+      <!-- جدول البلاغات الشامل -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-right text-xs">
+            <thead class="bg-slate-50 text-slate-600 border-b border-slate-200 font-bold">
+              <tr>
+                <th class="py-3.5 px-4">كود البلاغ</th>
+                <th class="py-3.5 px-4">الصورة</th>
+                <th class="py-3.5 px-4">المنطقة والموقع</th>
+                <th class="py-3.5 px-4">نوع الحالة</th>
+                <th class="py-3.5 px-4">بيانات المبلغ</th>
+                <th class="py-3.5 px-4">الحالة الحالية</th>
+                <th class="py-3.5 px-4">توقيت البلاغ</th>
+                <th class="py-3.5 px-4 text-center">إجراءات الإدارة</th>
+              </tr>
+            </thead>
+            <tbody id="reports-table-body" class="divide-y divide-slate-100">
+              <!-- صفوف البلاغات تتولد ديناميكياً -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ======================================================================
+       نافذة معاينة البلاغ وتغيير الحالة وإضافة ملاحظة الخط الزمني
+       ====================================================================== -->
+  <div id="report-detail-modal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal-950/70 backdrop-blur-sm">
+    <div class="modal-content bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden max-h-[92vh] flex flex-col">
+      
+      <!-- رأس المودال -->
+      <div class="p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50/70 shrink-0">
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="modal-ticket-code" class="text-base font-extrabold text-lotus-700 font-mono">SH-1024</span>
+            <span id="modal-current-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold"></span>
+          </div>
+          <span id="modal-ticket-date" class="text-[11px] text-slate-400 mt-0.5 block"></span>
+        </div>
+        <button type="button" id="close-detail-modal-btn" class="p-1.5 text-slate-400 hover:text-charcoal-900">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- جسم المودال القابل للتمرير -->
+      <div class="p-6 overflow-y-auto space-y-6">
+        
+        <!-- تفاصيل الحالة والصورة -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="sm:col-span-1">
+            <img id="modal-dog-photo" src="" alt="صورة البلاغ" class="w-full h-36 object-cover rounded-xl border border-slate-200 bg-slate-100" />
+          </div>
+          <div class="sm:col-span-2 space-y-2 text-xs">
+            <div>
+              <span class="text-slate-400 block text-[10px]">نوع الحالة:</span>
+              <span id="modal-dog-condition" class="font-bold text-charcoal-900 text-sm"></span>
+            </div>
+            <div>
+              <span class="text-slate-400 block text-[10px]">المنطقة والعنوان:</span>
+              <span id="modal-dog-location" class="font-semibold text-charcoal-800"></span>
+            </div>
+            <div>
+              <span class="text-slate-400 block text-[10px]">المبلغ:</span>
+              <span id="modal-reporter-info" class="text-charcoal-800"></span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="text-slate-400 block text-[10px] mb-1">وصف الحالة:</span>
+          <p id="modal-dog-desc" class="text-xs text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-200 leading-relaxed"></p>
+        </div>
+
+        <!-- الخط الزمني التاريخي للحالة -->
+        <div>
+          <h4 class="text-xs font-bold text-charcoal-900 mb-2 flex items-center gap-1.5">
+            <i class="fa-solid fa-timeline text-lotus-600"></i>
+            <span>سجل حركة وتحديثات البلاغ (Timeline)</span>
+          </h4>
+          <div id="modal-timeline-container" class="space-y-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs">
+            <!-- يولد ديناميكياً -->
+          </div>
+        </div>
+
+        <!-- قسم تغيير الحالة وإضافة ملاحظة رسمية -->
+        <div class="p-4 rounded-xl bg-lotus-50/80 border border-lotus-200 space-y-3">
+          <h4 class="text-xs font-extrabold text-lotus-900 flex items-center gap-1.5">
+            <i class="fa-solid fa-pen-to-square"></i>
+            <span>تحديث حالة البلاغ وإضافة ملاحظة للمواطن</span>
+          </h4>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-charcoal-800 mb-1">الحالة الجديدة <span class="text-rose-500">*</span></label>
+              <select id="modal-status-select" class="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lotus-400 font-bold">
+                <option value="جديد">جديد</option>
+                <option value="قيد المراجعة">قيد المراجعة</option>
+                <option value="تم التواصل مع المبلغ">تم التواصل مع المبلغ</option>
+                <option value="تمت المعاينة">تمت المعاينة</option>
+                <option value="تم تحويله لفريق الاستجابة">تم تحويله لفريق الاستجابة</option>
+                <option value="تم التعامل مع الحالة">تم التعامل مع الحالة</option>
+                <option value="تعذر التعامل مع البلاغ">تعذر التعامل مع البلاغ</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-charcoal-800 mb-1">المسؤول / المشرف</label>
+              <input type="text" id="modal-staff-name" value="د. طارق سامي (مشرف العمليات)" class="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lotus-400" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-charcoal-800 mb-1">ملاحظة التحديث (تظهر مباشرة للمواطن عند تتبع البلاغ)</label>
+            <input type="text" id="modal-status-note" placeholder="مثال: تحركت سيارة الإسعاف رقم 04 بقيادة المسعف أحمد للموقع..." class="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lotus-400" />
+          </div>
+
+          <div class="flex justify-end pt-2">
+            <button type="button" id="modal-save-status-btn" class="px-5 py-2.5 bg-lotus-600 hover:bg-lotus-700 text-white font-bold text-xs rounded-xl shadow transition-colors flex items-center gap-2">
+              <i class="fa-solid fa-floppy-disk"></i>
+              <span>حفظ وتطبيق التحديث فوراً</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let reports = window.ShelterDB.getAllReports();
+      const tableBody = document.getElementById('reports-table-body');
+      const searchInput = document.getElementById('reports-search-input');
+      const filterBtns = document.querySelectorAll('.status-filter-btn');
+
+      // Modal elements
+      const detailModal = document.getElementById('report-detail-modal');
+      const closeDetailModalBtn = document.getElementById('close-detail-modal-btn');
+      const modalTicketCode = document.getElementById('modal-ticket-code');
+      const modalCurrentBadge = document.getElementById('modal-current-badge');
+      const modalTicketDate = document.getElementById('modal-ticket-date');
+      const modalDogPhoto = document.getElementById('modal-dog-photo');
+      const modalDogCondition = document.getElementById('modal-dog-condition');
+      const modalDogLocation = document.getElementById('modal-dog-location');
+      const modalReporterInfo = document.getElementById('modal-reporter-info');
+      const modalDogDesc = document.getElementById('modal-dog-desc');
+      const modalTimelineContainer = document.getElementById('modal-timeline-container');
+      const modalStatusSelect = document.getElementById('modal-status-select');
+      const modalStaffName = document.getElementById('modal-staff-name');
+      const modalStatusNote = document.getElementById('modal-status-note');
+      const modalSaveStatusBtn = document.getElementById('modal-save-status-btn');
+
+      let currentSelectedReport = null;
+      let activeFilter = 'الكل';
+
+      // تحديث عدادات الفلاتر
+      const updateFilterCounts = () => {
+        reports = window.ShelterDB.getAllReports();
+        document.getElementById('reports-total-badge').textContent = `${reports.length} بلاغات`;
+        document.getElementById('sidebar-reports-count').textContent = reports.length;
+        document.getElementById('count-all').textContent = reports.length;
+        document.getElementById('count-new').textContent = reports.filter(r => r.status === 'جديد').length;
+        document.getElementById('count-review').textContent = reports.filter(r => r.status === 'قيد المراجعة').length;
+        document.getElementById('count-contacted').textContent = reports.filter(r => r.status === 'تم التواصل مع المبلغ').length;
+        document.getElementById('count-assessed').textContent = reports.filter(r => r.status === 'تمت المعاينة').length;
+        document.getElementById('count-dispatched').textContent = reports.filter(r => r.status === 'تم تحويله لفريق الاستجابة').length;
+        document.getElementById('count-resolved').textContent = reports.filter(r => r.status === 'تم التعامل مع الحالة').length;
+        document.getElementById('count-unreachable').textContent = reports.filter(r => r.status === 'تعذر التعامل مع البلاغ').length;
+      };
+
+      // عرض جدول البلاغات
+      const renderReportsTable = () => {
+        updateFilterCounts();
+        if (!tableBody) return;
+        tableBody.innerHTML = '';
+
+        const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+        let filtered = reports;
+
+        if (activeFilter !== 'الكل') {
+          filtered = filtered.filter(r => r.status === activeFilter);
+        }
+
+        if (query) {
+          filtered = filtered.filter(r => 
+            (r.ticketCode && r.ticketCode.toLowerCase().includes(query)) ||
+            (r.district && r.district.toLowerCase().includes(query)) ||
+            (r.reporterName && r.reporterName.toLowerCase().includes(query)) ||
+            (r.reporterPhone && r.reporterPhone.includes(query)) ||
+            (r.dogCondition && r.dogCondition.toLowerCase().includes(query))
+          );
+        }
+
+        if (filtered.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="8" class="py-12 text-center text-slate-400">لا توجد بلاغات مطابقة لشروط البحث الحالية</td></tr>`;
+          return;
+        }
+
+        filtered.forEach(r => {
+          const badge = window.ShelterDB.STATUS_BADGES[r.status] || { bg: 'bg-slate-100 text-slate-700', icon: 'fa-circle' };
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-slate-50 transition-colors';
+          row.innerHTML = `
+            <td class="py-3 px-4 font-mono font-bold text-lotus-700">
+              <a href="track.html?code=${r.ticketCode}" target="_blank" class="hover:underline flex items-center gap-1">
+                <span>${r.ticketCode}</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-slate-400"></i>
+              </a>
+            </td>
+            <td class="py-3 px-4">
+              <img src="${r.photo || 'assets/images/hero-1.jpg'}" alt="صورة" class="w-10 h-10 rounded-lg object-cover border border-slate-200" />
+            </td>
+            <td class="py-3 px-4">
+              <span class="font-bold text-charcoal-900 block">${r.district}</span>
+              <span class="text-[11px] text-slate-400 block truncate max-w-xs">${r.locationDetail || ''}</span>
+            </td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-700">${r.dogCondition}</span>
+            </td>
+            <td class="py-3 px-4">
+              <span class="block font-medium text-charcoal-900">${r.reporterName}</span>
+              <a href="tel:${r.reporterPhone}" class="text-[11px] text-lotus-700 hover:underline dir-ltr text-right inline-block">${r.reporterPhone}</a>
+            </td>
+            <td class="py-3 px-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border ${badge.bg}">
+                <i class="fa-solid ${badge.icon} text-[10px]"></i>
+                <span>${r.status}</span>
+              </span>
+            </td>
+            <td class="py-3 px-4 text-[11px] text-slate-400 whitespace-nowrap">
+              ${window.ShelterDB.formatArabicDate(r.createdAt)}
+            </td>
+            <td class="py-3 px-4 text-center">
+              <button type="button" class="open-detail-btn px-3 py-1.5 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-lg shadow-sm transition-colors" data-code="${r.ticketCode}">
+                تحديث الحالة
+              </button>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+
+        // ربط أزرار فتح المودال
+        document.querySelectorAll('.open-detail-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const code = btn.dataset.code;
+            openReportModal(code);
+          });
+        });
+      };
+
+      // فتح مودال التفاصيل
+      const openReportModal = (code) => {
+        const report = window.ShelterDB.getReportByCode(code);
+        if (!report) return;
+        currentSelectedReport = report;
+
+        modalTicketCode.textContent = report.ticketCode;
+        const badge = window.ShelterDB.STATUS_BADGES[report.status] || { bg: 'bg-slate-100 text-slate-700' };
+        modalCurrentBadge.className = `px-2.5 py-0.5 rounded-full text-xs font-bold border ${badge.bg}`;
+        modalCurrentBadge.textContent = report.status;
+        modalTicketDate.textContent = `تاريخ البلاغ: ${new Date(report.createdAt).toLocaleString('ar-EG')}`;
+
+        modalDogPhoto.src = report.photo || 'assets/images/hero-1.jpg';
+        modalDogCondition.textContent = report.dogCondition;
+        modalDogLocation.textContent = `${report.district} - ${report.locationDetail || 'بدون تفاصيل إضافية'}`;
+        modalReporterInfo.innerHTML = `<strong>${report.reporterName}</strong> • هاتف: <a href="tel:${report.reporterPhone}" class="text-lotus-700 underline dir-ltr">${report.reporterPhone}</a>`;
+        modalDogDesc.textContent = report.description || 'لا يوجد وصف مدون.';
+
+        modalStatusSelect.value = report.status;
+        modalStatusNote.value = '';
+
+        // الخط الزمني
+        modalTimelineContainer.innerHTML = '';
+        if (report.timeline && report.timeline.length > 0) {
+          report.timeline.forEach((step, idx) => {
+            const tItem = document.createElement('div');
+            tItem.className = 'border-r-2 border-lotus-400 pr-3 relative pb-2';
+            tItem.innerHTML = `
+              <span class="font-bold text-charcoal-900 block">${step.status}</span>
+              <p class="text-[11px] text-slate-600 mt-0.5">${step.note}</p>
+              <span class="text-[10px] text-slate-400 mt-0.5 block">${step.staffName || ''} • ${window.ShelterDB.formatArabicDate(step.timestamp)}</span>
+            `;
+            modalTimelineContainer.appendChild(tItem);
+          });
+        }
+
+        detailModal.classList.add('open');
+      };
+
+      // حفظ التحديث للحالة
+      if (modalSaveStatusBtn) {
+        modalSaveStatusBtn.addEventListener('click', () => {
+          if (!currentSelectedReport) return;
+          const newStatus = modalStatusSelect.value;
+          const note = modalStatusNote.value.trim() || `تم تحويل الحالة إلى: ${newStatus}`;
+          const staff = modalStaffName.value.trim() || 'غرفة العمليات';
+
+          window.ShelterDB.updateReportStatus(currentSelectedReport.ticketCode, newStatus, note, staff);
+          detailModal.classList.remove('open');
+          renderReportsTable();
+          alert(`تم تحديث حالة البلاغ (${currentSelectedReport.ticketCode}) إلى "${newStatus}" بنجاح وتسجيل الملاحظة بالخط الزمني.`);
+        });
+      }
+
+      if (closeDetailModalBtn) {
+        closeDetailModalBtn.addEventListener('click', () => {
+          detailModal.classList.remove('open');
+        });
+      }
+
+      // أزرار الفلترة
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.className = 'status-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-white border border-slate-300 text-slate-700 hover:border-lotus-400';
+          });
+          btn.className = 'status-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-lotus-600 text-white shadow-sm';
+          activeFilter = btn.dataset.status;
+          renderReportsTable();
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', renderReportsTable);
+      }
+
+      // التحقق من وجود كود في الرابط ?search=SH-XXXX
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchParam = urlParams.get('search');
+      if (searchParam && searchInput) {
+        searchInput.value = searchParam;
+      }
+
+      renderReportsTable();
+
+      // فتح البلاغ مباشرة إذا كان هناك كود محدد
+      if (searchParam) {
+        const found = window.ShelterDB.getReportByCode(searchParam);
+        if (found) {
+          openReportModal(found.ticketCode);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

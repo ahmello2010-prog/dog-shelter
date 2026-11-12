@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة تحكم إدارة مأوى الكلاب بالقاهرة | Operations Dashboard</title>
+
+  <!-- Google Fonts: Cairo & Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            lotus: {
+              50: '#FDF2F4',
+              100: '#FCE7EC',
+              200: '#F8D0DB',
+              300: '#F2AEC1',
+              400: '#E88CA6',
+              500: '#D9829B',
+              600: '#C76B85',
+              700: '#B85875',
+              800: '#9E425E',
+              900: '#83394E',
+            },
+            charcoal: {
+              700: '#334155',
+              800: '#1E293B',
+              900: '#111827',
+              950: '#0F172A',
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-slate-100 text-charcoal-900 font-cairo antialiased min-h-screen flex flex-col md:flex-row">
+
+  <!-- ======================================================================
+       الشريط الجانبي للوحة الإدارة (Admin RTL Sidebar)
+       ====================================================================== -->
+  <aside id="admin-sidebar" class="w-full md:w-64 bg-charcoal-950 text-white shrink-0 flex flex-col justify-between border-l border-white/10 z-40">
+    <div>
+      <!-- رأس السايدبار -->
+      <div class="p-5 border-b border-white/10 flex items-center justify-between">
+        <a href="admin-dashboard.html" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-lotus-600 text-white flex items-center justify-center shadow">
+            <i class="fa-solid fa-paw text-lg"></i>
+          </div>
+          <div>
+            <span class="block text-sm font-extrabold text-white">إدارة مأوى القاهرة</span>
+            <span class="block text-[10px] text-lotus-300 font-semibold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              غرفة العمليات نشطة
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <!-- روابط التنقل الإدارية -->
+      <nav class="p-3 space-y-1 text-xs font-semibold">
+        <a href="admin-dashboard.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-lotus-600 text-white shadow-sm">
+          <i class="fa-solid fa-chart-pie w-4 text-center"></i>
+          <span>لوحة التحكم الرئيسية</span>
+        </a>
+
+        <a href="admin-reports.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-clipboard-list w-4 text-center text-lotus-400"></i>
+            <span>إدارة البلاغات</span>
+          </div>
+          <span id="sidebar-reports-count" class="px-2 py-0.5 rounded-full text-[10px] bg-lotus-900 text-lotus-200">4</span>
+        </a>
+
+        <a href="admin-help.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-hand-holding-medical w-4 text-center text-emerald-400"></i>
+            <span>طلبات المساعدة</span>
+          </div>
+          <span id="sidebar-help-count" class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-950 text-emerald-300">3</span>
+        </a>
+
+        <a href="admin-donations.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-heart w-4 text-center text-rose-400"></i>
+            <span>التبرعات الواردة</span>
+          </div>
+          <span id="sidebar-donations-count" class="px-2 py-0.5 rounded-full text-[10px] bg-rose-950 text-rose-300">4</span>
+        </a>
+
+        <a href="admin-careers.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-handshake-angle w-4 text-center text-amber-400"></i>
+            <span>التطوع والتوظيف</span>
+          </div>
+          <span id="sidebar-careers-count" class="px-2 py-0.5 rounded-full text-[10px] bg-amber-950 text-amber-300">3</span>
+        </a>
+
+        <a href="admin-activities.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <i class="fa-solid fa-newspaper w-4 text-center text-cyan-400"></i>
+          <span>الأنشطة والأخبار</span>
+        </a>
+
+        <a href="admin-users.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+          <i class="fa-solid fa-users-gear w-4 text-center text-indigo-400"></i>
+          <span>المستخدمين والصلاحيات</span>
+        </a>
+
+        <div class="pt-4 border-t border-white/10 mt-4">
+          <a href="map.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
+            <i class="fa-solid fa-map-location-dot w-4 text-center text-lotus-400"></i>
+            <span>خريطة العمليات الميدانية</span>
+          </a>
+          <a href="index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:bg-white/5 hover:text-white transition-colors">
+            <i class="fa-solid fa-arrow-up-right-from-square w-4 text-center"></i>
+            <span>بوابة المواطنين العامة</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- أسفل السايدبار: المستخدم وزر الخروج -->
+    <div class="p-4 border-t border-white/10 bg-black/20">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-lotus-700 text-white font-bold flex items-center justify-center text-xs">
+            ط.س
+          </div>
+          <div>
+            <span class="block text-xs font-bold text-white">د. طارق سامي</span>
+            <span class="block text-[10px] text-slate-400">مشرف العمليات</span>
+          </div>
+        </div>
+        <button type="button" id="admin-logout-btn" class="p-1.5 text-slate-400 hover:text-rose-400 transition-colors" title="تسجيل الخروج">
+          <i class="fa-solid fa-power-off text-sm"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================
+       المحتوى الإداري الرئيسي (Dashboard Main Area)
+       ====================================================================== -->
+  <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+    
+    <!-- شريط الإدارة العلوي (Topbar) -->
+    <header class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
+      <div class="flex items-center gap-3">
+        <h1 class="text-lg font-black text-charcoal-950">نظرة عامة على عمليات المأوى</h1>
+        <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
+          القاهرة والجيزة
+        </span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="admin-reports.html" class="px-3.5 py-2 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-lg shadow-sm transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-plus text-xs"></i>
+          <span>إدارة وتحديث البلاغات</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- مساحة المحتوى والإحصائيات -->
+    <main class="p-6 space-y-6">
+
+      <!-- بطاقات المؤشرات الرقمية الحية (KPI Cards) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- بطاقة 1: إجمالي البلاغات -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-500 font-semibold block mb-1">إجمالي البلاغات</span>
+            <span id="stat-total-reports" class="text-2xl font-black text-charcoal-950">0</span>
+            <span class="text-[10px] text-blue-600 font-bold block mt-1"><i class="fa-solid fa-arrow-trend-up ml-0.5"></i> موثقة بالنظام</span>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-clipboard-check"></i>
+          </div>
+        </div>
+
+        <!-- بطاقة 2: بلاغات قيد الاستجابة -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-500 font-semibold block mb-1">قيد التدخل الميداني</span>
+            <span id="stat-active-reports" class="text-2xl font-black text-lotus-700">0</span>
+            <span class="text-[10px] text-lotus-600 font-bold block mt-1"><i class="fa-solid fa-truck-fast ml-0.5"></i> فرق الاستجابة في الموقع</span>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-lotus-50 text-lotus-700 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-truck-medical"></i>
+          </div>
+        </div>
+
+        <!-- بطاقة 3: إجمالي التبرعات المحصلة -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-500 font-semibold block mb-1">التبرعات المالية الواردة</span>
+            <span id="stat-donations-sum" class="text-2xl font-black text-emerald-600">0 ج.م</span>
+            <span class="text-[10px] text-emerald-600 font-bold block mt-1"><i class="fa-solid fa-circle-check ml-0.5"></i> معتمدة عبر إنستا باي والمحافظ</span>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+          </div>
+        </div>
+
+        <!-- بطاقة 4: طلبات المساعدة الجديدة -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-500 font-semibold block mb-1">طلبات المساعدة</span>
+            <span id="stat-help-count" class="text-2xl font-black text-amber-600">0</span>
+            <span class="text-[10px] text-amber-600 font-bold block mt-1"><i class="fa-solid fa-clock ml-0.5"></i> رعاية بيطرية وتطعيم TNR</span>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-hand-holding-medical"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- توزيع الحالات وأحدث البلاغات -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- جدول أحدث البلاغات الواردة (2 أعمدة) -->
+        <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="p-5 border-b border-slate-200 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-list-check text-lotus-600"></i>
+              <h2 class="text-sm font-extrabold text-charcoal-950">أحدث بلاغات الإنقاذ المسجلة</h2>
+            </div>
+            <a href="admin-reports.html" class="text-xs font-bold text-lotus-700 hover:text-lotus-800">عرض كافة البلاغات (7 حالات) ←</a>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs">
+              <thead class="bg-slate-50 text-slate-500 border-b border-slate-200 font-bold">
+                <tr>
+                  <th class="py-3 px-4">رقم البلاغ</th>
+                  <th class="py-3 px-4">المنطقة</th>
+                  <th class="py-3 px-4">نوع الحالة</th>
+                  <th class="py-3 px-4">المبلغ</th>
+                  <th class="py-3 px-4">الحالة الراهنة</th>
+                  <th class="py-3 px-4 text-center">إجراء</th>
+                </tr>
+              </thead>
+              <tbody id="recent-reports-table" class="divide-y divide-slate-100">
+                <!-- صفوف البلاغات ديناميكياً -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- بطاقة توزيع حالات البلاغات والتقدم (عمود 1) -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h2 class="text-sm font-extrabold text-charcoal-950 flex items-center gap-2">
+              <i class="fa-solid fa-chart-column text-lotus-600"></i>
+              <span>توزيع الحالات السبع المعتمدة</span>
+            </h2>
+          </div>
+
+          <div id="status-distribution-bars" class="space-y-3.5 text-xs">
+            <!-- تتولد ديناميكياً -->
+          </div>
+
+          <!-- بطاقة الوصول الميداني السريع -->
+          <div class="p-4 rounded-xl bg-lotus-50/70 border border-lotus-200 text-xs text-lotus-900 space-y-2">
+            <div class="flex items-center gap-2 font-bold text-lotus-800">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>تنبيه الطوارئ الميداني</span>
+            </div>
+            <p class="text-[11px] text-lotus-700 leading-relaxed">
+              فرق الاستجابة في قطاع شبرامنت وسقارة تعمل بنظام المناوبات. يرجى توثيق تحديثات المعاينة فور تحرك السيارات.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // قراءة البيانات من LocalStorage
+      const reports = window.ShelterDB.getAllReports();
+      const helpRequests = window.ShelterDB.getAllHelpRequests();
+      const donations = window.ShelterDB.getAllDonations();
+      const careers = window.ShelterDB.getAllCareers();
+
+      // تحديث عدادات السايدبار
+      document.getElementById('sidebar-reports-count').textContent = reports.length;
+      document.getElementById('sidebar-help-count').textContent = helpRequests.length;
+      document.getElementById('sidebar-donations-count').textContent = donations.length;
+      document.getElementById('sidebar-careers-count').textContent = careers.length;
+
+      // تحديث بطاقات الـ KPI
+      const stats = window.ShelterDB.getReportsStatistics();
+      document.getElementById('stat-total-reports').textContent = stats.total;
+      document.getElementById('stat-active-reports').textContent = stats.inProgress;
+      document.getElementById('stat-help-count').textContent = helpRequests.length;
+
+      const totalDonationsAmount = donations
+        .filter(d => d.type === 'مالي' && d.amount)
+        .reduce((sum, d) => sum + parseFloat(d.amount), 0);
+      document.getElementById('stat-donations-sum').textContent = `${totalDonationsAmount.toLocaleString('ar-EG')} ج.م`;
+
+      // تعبئة جدول أحدث البلاغات
+      const tableBody = document.getElementById('recent-reports-table');
+      if (tableBody) {
+        tableBody.innerHTML = '';
+        const recent = reports.slice(0, 5);
+
+        if (recent.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-slate-400">لا توجد بلاغات مسجلة حتى الآن</td></tr>`;
+        } else {
+          recent.forEach(r => {
+            const badge = window.ShelterDB.STATUS_BADGES[r.status] || { bg: 'bg-slate-100 text-slate-700', icon: 'fa-circle' };
+            const row = document.createElement('tr');
+            row.className = 'hover:bg-slate-50/80 transition-colors';
+            row.innerHTML = `
+              <td class="py-3 px-4 font-mono font-bold text-lotus-700">${r.ticketCode}</td>
+              <td class="py-3 px-4 font-semibold text-charcoal-900">${r.district.split('-')[0]}</td>
+              <td class="py-3 px-4 text-slate-600">${r.dogCondition}</td>
+              <td class="py-3 px-4 text-slate-600">${r.reporterName}</td>
+              <td class="py-3 px-4">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border ${badge.bg}">
+                  <i class="fa-solid ${badge.icon} text-[10px]"></i>
+                  <span>${r.status}</span>
+                </span>
+              </td>
+              <td class="py-3 px-4 text-center">
+                <a href="admin-reports.html?search=${r.ticketCode}" class="px-2.5 py-1 text-xs font-bold text-lotus-700 hover:bg-lotus-50 rounded border border-lotus-200 transition-colors">
+                  معاينة وتحديث
+                </a>
+              </td>
+            `;
+            tableBody.appendChild(row);
+          });
+        }
+      }
+
+      // تعبئة أشرطة توزيع الحالات
+      const distContainer = document.getElementById('status-distribution-bars');
+      if (distContainer) {
+        distContainer.innerHTML = '';
+        const allStatuses = window.ShelterDB.STATUSES;
+        const total = reports.length || 1;
+
+        allStatuses.forEach(st => {
+          const count = reports.filter(r => r.status === st).length;
+          const pct = Math.round((count / total) * 100);
+          const badge = window.ShelterDB.STATUS_BADGES[st] || { dot: 'bg-slate-400' };
+
+          const item = document.createElement('div');
+          item.className = 'space-y-1';
+          item.innerHTML = `
+            <div class="flex items-center justify-between text-[11px] font-bold text-charcoal-800">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full ${badge.dot}"></span>
+                ${st}
+              </span>
+              <span>${count} (${pct}%)</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="${badge.dot} h-1.5 rounded-full" style="width: ${pct}%"></div>
+            </div>
+          `;
+          distContainer.appendChild(item);
+        });
+      }
+
+      // تسجيل الخروج
+      const logoutBtn = document.getElementById('admin-logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          window.ShelterDB.logoutAdmin();
+          window.location.href = 'admin-login.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
