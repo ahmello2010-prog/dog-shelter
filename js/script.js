@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDonationCards();
   initReportForm();
   initTrackingSystem();
+  initOperationsMap();
 });
 
 /* ==========================================================================
@@ -571,3 +572,435 @@ function showToast(message, type = 'info') {
     toast.classList.add('translate-y-20', 'opacity-0');
   }, 4500);
 }
+
+/* ==========================================================================
+   9. خريطة العمليات الميدانية التفاعلية (Interactive Leaflet Map Engine)
+   ========================================================================== */
+function initOperationsMap() {
+  const mapElement = document.getElementById('cairo-operations-map');
+  const zonesContainer = document.getElementById('map-zones-container');
+  const filterCountBadge = document.getElementById('filtered-count-badge');
+  const recenterBtn = document.getElementById('map-recenter-btn');
+  const searchInput = document.getElementById('map-search-input');
+  const filterButtons = document.querySelectorAll('.map-filter-btn');
+
+  if (!mapElement) return;
+
+  // التأكد من توفر مكتبة Leaflet
+  if (typeof L === 'undefined') {
+    mapElement.innerHTML = `
+      <div class="h-full flex flex-col items-center justify-center p-6 text-center text-slate-500">
+        <i class="fa-solid fa-triangle-exclamation text-3xl text-amber-500 mb-2"></i>
+        <p class="text-sm font-bold">جاري تحميل خريطة العمليات التفاعلية...</p>
+        <p class="text-xs text-slate-400 mt-1">يرجى التأكد من الاتصال بالإنترنت لتحميل طبقات الخريطة عبر CDN.</p>
+      </div>
+    `;
+    return;
+  }
+
+  // بيانات المواقع والبلاغات الحية بالقاهرة الكبرى والجيزة
+  const cairoZones = [
+    {
+      id: 'zone-1',
+      title: 'ملاذ شبرامنت وسقارة المركزي',
+      category: 'shelter',
+      categoryName: 'ملاذ رئيسي',
+      district: 'شبرامنت - طريق سقارة السياحي',
+      lat: 29.8650,
+      lng: 31.2180,
+      status: 'مفتوح للرعاية والتأهيل',
+      statusType: 'success',
+      team: 'إدارة العمليات المركزية',
+      time: 'سعة 1200+ كلب',
+      casesCount: '450 حالة مقيمة',
+      ticketCode: null,
+      description: 'المقر الرئيسي للمأوى بمساحة 15 فداناً، يضم الحظائر الرملية المفتوحة والعيادة الجراحية المركزية وملاعب التأهيل.',
+      badgeClass: 'bg-slate-900 text-white',
+      markerColor: '#0F172A',
+      icon: 'fa-shield-dog',
+      pulse: ''
+    },
+    {
+      id: 'zone-2',
+      title: 'إنقاذ عاجل: كلب مصاب بصدم سيارة',
+      category: 'emergency',
+      categoryName: 'بلاغ طوارئ',
+      district: 'المعادي - شارع النصر / تقاطع دجلة',
+      lat: 29.9602,
+      lng: 31.2769,
+      status: 'سيارة الإسعاف 02 بالموقع',
+      statusType: 'danger',
+      team: 'وحدة التدخل السريع رقم 02',
+      time: 'منذ 18 دقيقة',
+      casesCount: 'حالة حرجة',
+      ticketCode: 'CAI-2026-8942',
+      description: 'كلب بلدي يعاني من كسر بالساق الخلفية، تم توجيه المسعف وتقديم الإسعافات الأولية ونقله للعيادة.',
+      badgeClass: 'bg-rose-50 text-rose-700 border border-rose-200',
+      markerColor: '#E11D48',
+      icon: 'fa-truck-medical',
+      pulse: 'pulse-emergency'
+    },
+    {
+      id: 'zone-3',
+      title: 'حملة التعقيم والتطعيم الوطني (TNR)',
+      category: 'tnr',
+      categoryName: 'حملة TNR',
+      district: 'القاهرة الجديدة - التجمع الخامس (النرجس والياسمين)',
+      lat: 30.0150,
+      lng: 31.4350,
+      status: 'حملة نشطة ومستمرة',
+      statusType: 'lotus',
+      team: 'فريق تعقيم قطاع شرق القاهرة',
+      time: 'اليوم الثالث للحملة',
+      casesCount: 'تم تعقيم 28 كلباً',
+      ticketCode: 'TNR-2026-031',
+      description: 'صيد إنساني وتعقيم جراحي مع التطعيم الرباعي وضد السعار ووضع علامة الأذن للمجموعة.',
+      badgeClass: 'bg-lotus-50 text-lotus-800 border border-lotus-200',
+      markerColor: '#D9829B',
+      icon: 'fa-syringe',
+      pulse: 'pulse-tnr'
+    },
+    {
+      id: 'zone-4',
+      title: 'إنقاذ جراء حديثة الولادة مع الأم',
+      category: 'emergency',
+      categoryName: 'بلاغ طوارئ',
+      district: 'مدينة نصر - تقاطع مكرم عبيد',
+      lat: 30.0610,
+      lng: 31.3450,
+      status: 'جاري تأمين الموقع ونقل الجراء',
+      statusType: 'danger',
+      team: 'فرقة الإنقاذ الميداني 05',
+      time: 'منذ 35 دقيقة',
+      casesCount: 'أم + 6 جراء',
+      ticketCode: 'CAI-2026-9104',
+      description: 'كلبة وضعت 6 جراء في ورشة مهجورة معرضة لمخاطر الطريق، يجري نقلهم لحضانة المأوى.',
+      badgeClass: 'bg-rose-50 text-rose-700 border border-rose-200',
+      markerColor: '#E11D48',
+      icon: 'fa-truck-medical',
+      pulse: 'pulse-emergency'
+    },
+    {
+      id: 'zone-5',
+      title: 'العيادة البيطرية الميدانية المتنقلة',
+      category: 'clinic',
+      categoryName: 'عيادة متنقلة',
+      district: 'الزمالك - محيط حديقة الأسماك وشارع حسن صبري',
+      lat: 30.0570,
+      lng: 31.2210,
+      status: 'فحص وتطعيم دوري مجاني',
+      statusType: 'teal',
+      team: 'العيادة رقم 01 - د. مي عبد العزيز',
+      time: 'متواجدة حتى 4:00 عصراً',
+      casesCount: 'فحص 19 حالة اليوم',
+      ticketCode: 'VET-2026-009',
+      description: 'فحص الحالات الجلدية، تطعيمات السعار، وتوزيع دراي فود ومكملات لمربي الشوارع ومحبي الحيوانات.',
+      badgeClass: 'bg-teal-50 text-teal-800 border border-teal-200',
+      markerColor: '#0D9488',
+      icon: 'fa-stethoscope',
+      pulse: ''
+    },
+    {
+      id: 'zone-6',
+      title: 'ملاذ طريق مصر إسكندرية الصحراوي',
+      category: 'shelter',
+      categoryName: 'ملاذ فرعي',
+      district: 'طريق مصر إسكندرية الصحراوي - الكيلو 52',
+      lat: 30.0450,
+      lng: 30.9500,
+      status: 'ملاذ استشفاء ورعاية كبار السن',
+      statusType: 'success',
+      team: 'فريق رعاية غرب القاهرة',
+      time: 'مفتوح طوال الأسبوع',
+      casesCount: '320 كلب مقيم',
+      ticketCode: null,
+      description: 'مخصص للكلاب كبار السن وذوي الإعاقة الحركية، حظائر مظللة واسعة وبيئة رملية هادئة.',
+      badgeClass: 'bg-slate-900 text-white',
+      markerColor: '#0F172A',
+      icon: 'fa-shield-dog',
+      pulse: ''
+    },
+    {
+      id: 'zone-7',
+      title: 'حملة مسح وتطعيم السعار الميدانية',
+      category: 'tnr',
+      categoryName: 'حملة TNR',
+      district: 'الشيخ زايد - الحي السابع والثامن',
+      lat: 30.0380,
+      lng: 30.9950,
+      status: 'تطعيم وتوثيق إلكتروني',
+      statusType: 'lotus',
+      team: 'فريق الشيخ زايد وأكتوبر',
+      time: 'منذ ساعتين',
+      casesCount: '15 حالة محصنة',
+      ticketCode: 'TNR-2026-032',
+      description: 'تطعيم وقائي ضد السعار والديدان بالتعاون مع اتحاد شاغلي أحياء الشيخ زايد.',
+      badgeClass: 'bg-lotus-50 text-lotus-800 border border-lotus-200',
+      markerColor: '#D9829B',
+      icon: 'fa-syringe',
+      pulse: 'pulse-tnr'
+    },
+    {
+      id: 'zone-8',
+      title: 'إنقاذ كلب عالق بموقع إنشاءات',
+      category: 'emergency',
+      categoryName: 'بلاغ طوارئ',
+      district: 'مصر الجديدة - ألماظة / النزهة',
+      lat: 30.0880,
+      lng: 31.3410,
+      status: 'تم الإنقاذ بسلام',
+      statusType: 'danger',
+      team: 'وحدة التدخل السريع رقم 03',
+      time: 'منذ 50 دقيقة',
+      casesCount: 'حالة مستقرة',
+      ticketCode: 'CAI-2026-7811',
+      description: 'تم انتشال كلب سقط في حفرة إنشائية غير مسورة، الحالة مستقرة ومتحفظ عليه للفحص الطبي الشامل.',
+      badgeClass: 'bg-rose-50 text-rose-700 border border-rose-200',
+      markerColor: '#E11D48',
+      icon: 'fa-truck-medical',
+      pulse: ''
+    }
+  ];
+
+  // إحداثيات مركز القاهرة
+  const cairoCenter = [30.015, 31.235];
+  const defaultZoom = 11;
+
+  // تهيئة خريطة Leaflet
+  const map = L.map('cairo-operations-map', {
+    center: cairoCenter,
+    zoom: defaultZoom,
+    zoomControl: true,
+    scrollWheelZoom: false // منع التمرير غير المقصود
+  });
+
+  // تمكين التمرير بالعجلة بعد التركيز
+  map.on('focus', () => map.scrollWheelZoom.enable());
+  map.on('blur', () => map.scrollWheelZoom.disable());
+
+  // طبقة خريطة CartoDB Voyager الخفيفة والأنيقة مع أسماء الشوارع باللغة العربية
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  // مجموعة الدبابيس (Markers Layer Group)
+  const markersLayer = L.layerGroup().addTo(map);
+  const markerMap = {}; // ربط معرّف المنطقة بالماركر المقابل
+
+  // دالة إنشاء محتوى النافذة المنبثقة لكل موقع
+  const createPopupContent = (zone) => {
+    return `
+      <div class="text-right p-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-2">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold ${zone.badgeClass}">
+            <i class="fa-solid ${zone.icon} text-[10px]"></i>
+            ${zone.categoryName}
+          </span>
+          <span class="text-[11px] text-slate-400 font-medium">${zone.time}</span>
+        </div>
+        
+        <h4 class="text-sm font-extrabold text-charcoal-900 mb-1 leading-snug">${zone.title}</h4>
+        <p class="text-xs text-slate-500 mb-2 flex items-center gap-1">
+          <i class="fa-solid fa-location-dot text-lotus-600"></i>
+          <span>${zone.district}</span>
+        </p>
+
+        <p class="text-xs text-slate-600 leading-relaxed mb-3 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+          ${zone.description}
+        </p>
+
+        <div class="text-[11px] text-slate-500 space-y-1 mb-3">
+          <div class="flex justify-between">
+            <span>الفريق المسؤول:</span>
+            <strong class="text-slate-800">${zone.team}</strong>
+          </div>
+          <div class="flex justify-between">
+            <span>الحالة:</span>
+            <strong class="text-slate-800">${zone.status}</strong>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-slate-100 flex items-center gap-2">
+          ${zone.ticketCode ? `
+            <button onclick="document.getElementById('track-ticket-input').value='${zone.ticketCode}'; document.getElementById('track-report-form').dispatchEvent(new Event('submit')); document.querySelector('[data-modal-target=track-modal]').click();" class="flex-1 py-1.5 px-3 bg-lotus-600 hover:bg-lotus-700 text-white rounded-lg text-xs font-bold transition-colors text-center">
+              <i class="fa-solid fa-magnifying-glass ml-1"></i> تتبع البلاغ
+            </button>
+          ` : `
+            <button onclick="document.querySelector('[data-modal-target=report-modal]').click();" class="flex-1 py-1.5 px-3 bg-charcoal-900 hover:bg-charcoal-800 text-white rounded-lg text-xs font-bold transition-colors text-center">
+              <i class="fa-solid fa-truck-medical ml-1"></i> إرسال إسناد
+            </button>
+          `}
+          <a href="tel:19875" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition-colors" title="اتصال بالخط الساخن">
+            <i class="fa-solid fa-phone"></i>
+          </a>
+        </div>
+      </div>
+    `;
+  };
+
+  // رسم الدبابيس وتحديث القائمة الجانبية
+  let currentFilter = 'all';
+  let currentSearch = '';
+
+  const renderZones = (shouldFitBounds = false) => {
+    markersLayer.clearLayers();
+    if (zonesContainer) zonesContainer.innerHTML = '';
+
+    const filtered = cairoZones.filter(zone => {
+      const matchesFilter = (currentFilter === 'all') || (zone.category === currentFilter);
+      const matchesSearch = !currentSearch || 
+        zone.title.includes(currentSearch) || 
+        zone.district.includes(currentSearch) || 
+        zone.description.includes(currentSearch);
+      return matchesFilter && matchesSearch;
+    });
+
+    if (filterCountBadge) {
+      filterCountBadge.textContent = `${filtered.length} مواقع`;
+    }
+
+    if (filtered.length === 0 && zonesContainer) {
+      zonesContainer.innerHTML = `
+        <div class="p-8 text-center text-slate-400">
+          <i class="fa-solid fa-map-pin text-2xl mb-2 text-slate-300"></i>
+          <p class="text-xs">لا توجد عمليات تطابق معايير البحث الحالية.</p>
+        </div>
+      `;
+      return;
+    }
+
+    const bounds = L.latLngBounds();
+
+    filtered.forEach(zone => {
+      // 1. إضافة الدبوس المخصص على الخريطة
+      const customIcon = L.divIcon({
+        className: 'custom-map-div-icon',
+        html: `
+          <div class="custom-pin-marker ${zone.pulse}" style="background-color: ${zone.markerColor};" title="${zone.title}">
+            <i class="fa-solid ${zone.icon}"></i>
+          </div>
+        `,
+        iconSize: [44, 44],
+        iconAnchor: [22, 22],
+        popupAnchor: [0, -22]
+      });
+
+      const marker = L.marker([zone.lat, zone.lng], { icon: customIcon });
+      marker.bindPopup(createPopupContent(zone), { maxWidth: 300 });
+
+      marker.on('click', () => {
+        highlightSidebarItem(zone.id);
+      });
+
+      markersLayer.addLayer(marker);
+      markerMap[zone.id] = marker;
+      bounds.extend([zone.lat, zone.lng]);
+
+      // 2. إنشاء بطاقة الموقع في القائمة الجانبية
+      if (zonesContainer) {
+        const card = document.createElement('div');
+        card.className = 'map-zone-item bg-white p-3.5 rounded-xl border border-slate-200 cursor-pointer shadow-sm';
+        card.setAttribute('data-zone-id', zone.id);
+        
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-2 mb-1.5">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${zone.badgeClass}">
+              <i class="fa-solid ${zone.icon} text-[9px]"></i>
+              ${zone.categoryName}
+            </span>
+            <span class="text-[10px] text-slate-400 font-medium">${zone.time}</span>
+          </div>
+
+          <h4 class="text-xs font-bold text-charcoal-900 hover:text-lotus-700 transition-colors leading-snug">
+            ${zone.title}
+          </h4>
+
+          <p class="text-[11px] text-slate-500 mt-1 flex items-center gap-1 truncate">
+            <i class="fa-solid fa-location-dot text-lotus-500 shrink-0"></i>
+            <span>${zone.district}</span>
+          </p>
+
+          <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
+            <span class="text-slate-600 font-medium">${zone.team}</span>
+            <span class="text-lotus-700 font-bold hover:underline flex items-center gap-1">
+              <span>تحديد على الخريطة</span>
+              <i class="fa-solid fa-arrow-left text-[9px]"></i>
+            </span>
+          </div>
+        `;
+
+        card.addEventListener('click', () => {
+          focusOnZone(zone);
+        });
+
+        zonesContainer.appendChild(card);
+      }
+    });
+
+    if (shouldFitBounds && filtered.length > 0 && bounds.isValid()) {
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
+    }
+  };
+
+  // التركيز على موقع معين عند النقر
+  const focusOnZone = (zone) => {
+    map.flyTo([zone.lat, zone.lng], 14, { duration: 1 });
+    const marker = markerMap[zone.id];
+    if (marker) {
+      setTimeout(() => {
+        marker.openPopup();
+      }, 700);
+    }
+    highlightSidebarItem(zone.id);
+  };
+
+  // إبراز البطاقة النشطة في القائمة الجانبية والتمرير إليها
+  const highlightSidebarItem = (zoneId) => {
+    const allCards = document.querySelectorAll('.map-zone-item');
+    allCards.forEach(c => c.classList.remove('active-item'));
+    
+    const targetCard = document.querySelector(`.map-zone-item[data-zone-id="${zoneId}"]`);
+    if (targetCard) {
+      targetCard.classList.add('active-item');
+      targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  };
+
+  // أزرار التصفية
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => {
+        b.classList.remove('active', 'bg-lotus-600', 'text-white', 'shadow-sm');
+        b.classList.add('bg-white', 'text-slate-700');
+      });
+
+      btn.classList.add('active', 'bg-lotus-600', 'text-white', 'shadow-sm');
+      btn.classList.remove('bg-white', 'text-slate-700');
+
+      currentFilter = btn.getAttribute('data-filter');
+      renderZones(true);
+    });
+  });
+
+  // حقل البحث اللحظي
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value.trim();
+      renderZones(false);
+    });
+  }
+
+  // زر إعادة ضبط العرض على القاهرة
+  if (recenterBtn) {
+    recenterBtn.addEventListener('click', () => {
+      map.flyTo(cairoCenter, defaultZoom, { duration: 1 });
+      showToast('تمت إعادة ضبط زاوية عرض الخريطة على القاهرة الكبرى', 'info');
+    });
+  }
+
+  // العرض الأولي للمواقع
+  renderZones(false);
+}
+
