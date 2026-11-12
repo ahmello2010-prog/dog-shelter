@@ -1,12 +1,1153 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Cairo dog`s shelter</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/style.css" />
-    </head>
-    <body>
-        <script type="module" src="js/script.js"></script>
-    </body>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>النظام الرقمي لإدارة مأوى الكلاب الضالة بالقاهرة | Digital Shelter Management System</title>
+  <meta name="description" content="النظام الرقمي لإدارة مأوى الكلاب الضالة بالقاهرة - منظومة إنسانية متكاملة لإنقاذ ورعاية الكلاب الضالة، إدارة البلاغات، برامج التعقيم والتطعيم الوطني (TNR)، والتبني المسؤول بمحيط القاهرة الكبرى." />
+  <meta property="og:title" content="النظام الرقمي لإدارة مأوى الكلاب الضالة بالقاهرة" />
+  <meta property="og:description" content="منظومة إنسانية متكاملة لإنقاذ ورعاية الكلاب الضالة، برامج التعقيم والتطعيم الوطني، والتبني المسؤول." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Cairo & Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            lotus: {
+              50: '#FDF2F4',
+              100: '#FCE7EC',
+              200: '#F8D0DB',
+              300: '#F2AEC1',
+              400: '#E88CA6',
+              500: '#D9829B',
+              600: '#C76B85',
+              700: '#B85875',
+              800: '#9E425E',
+              900: '#83394E',
+            },
+            charcoal: {
+              700: '#334155',
+              800: '#1E293B',
+              900: '#111827',
+              950: '#0F172A',
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-white text-charcoal-900 font-cairo antialiased selection:bg-lotus-200 selection:text-lotus-900">
+
+  <!-- ======================================================================
+       1. شريط التنقل العلوي (Sticky Navbar with Scroll Detection)
+       ====================================================================== -->
+  <header id="main-navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 bg-transparent text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-4">
+        
+        <!-- الشعار والهوية البصرية -->
+        <a href="#hero" class="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-lotus-400 rounded-lg">
+          <div class="w-11 h-11 rounded-xl bg-lotus-600 text-white flex items-center justify-center shadow-md shadow-lotus-900/20 group-hover:scale-105 transition-transform duration-200">
+            <i class="fa-solid fa-paw text-xl"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="brand-title text-lg font-extrabold tracking-tight text-white transition-colors">
+              مأوى القاهرة للكلاب
+            </span>
+            <span class="brand-subtitle text-[11px] font-medium text-white/80 transition-colors">
+              النظام الرقمي لإدارة المأوى ورعاية البلاغات
+            </span>
+          </div>
+        </a>
+
+        <!-- روابط التنقل الرئيسية (سطح المكتب) -->
+        <nav class="hidden xl:flex items-center gap-6 text-sm font-semibold">
+          <a href="#hero" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap">الرئيسية</a>
+          <a href="#" data-modal-target="report-modal" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+            تقديم بلاغ
+          </a>
+          <a href="#" data-modal-target="track-modal" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap">متابعة بلاغ</a>
+          <a href="#about" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap">من نحن</a>
+          <a href="#services" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap">خدمات المأوى</a>
+          <a href="#" data-modal-target="volunteer-modal" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap">التطوع والوظائف</a>
+          <a href="#" data-modal-target="activities-modal" class="nav-link text-white/90 hover:text-lotus-300 transition-colors whitespace-nowrap">أنشطة المأوى</a>
+        </nav>
+
+        <!-- منطقة الإجراءات وزر لوحة الإدارة -->
+        <div class="hidden md:flex items-center gap-3">
+          <!-- زر التبرع السريع -->
+          <button data-modal-target="donate-modal" class="px-4 py-2 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-2 whitespace-nowrap">
+            <i class="fa-solid fa-heart text-xs"></i>
+            <span>تبرع الآن</span>
+          </button>
+
+          <!-- زر لوحة الإدارة البارز -->
+          <button data-modal-target="admin-modal" class="px-4 py-2 text-xs font-bold text-charcoal-950 bg-white/90 hover:bg-white border border-white/40 hover:border-white rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-2 whitespace-nowrap">
+            <i class="fa-solid fa-lock text-xs text-lotus-700"></i>
+            <span>لوحة الإدارة</span>
+          </button>
+        </div>
+
+        <!-- زر القائمة للهواتف (Hamburger Button) -->
+        <div class="flex items-center gap-2 xl:hidden">
+          <button data-modal-target="report-modal" class="md:hidden px-3 py-1.5 text-xs font-bold bg-lotus-600 text-white rounded-lg shadow-sm">
+            بلاغ سريع
+          </button>
+          
+          <button id="mobile-menu-btn" class="mobile-toggle-btn p-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors focus:outline-none" aria-label="فتح القائمة الرئيسية">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- القائمة المنسدلة للهواتف (Mobile Drawer / Dropdown) -->
+  <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-charcoal-950/80 backdrop-blur-sm xl:hidden transition-all duration-300">
+    <div class="fixed top-0 right-0 w-5/6 max-w-sm h-full bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+          <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-lg bg-lotus-600 text-white flex items-center justify-center">
+              <i class="fa-solid fa-paw text-base"></i>
+            </div>
+            <span class="text-base font-bold text-charcoal-900">مأوى القاهرة للكلاب</span>
+          </div>
+          <button id="mobile-menu-close" class="p-2 text-gray-400 hover:text-gray-700 focus:outline-none" aria-label="إغلاق القائمة">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <nav class="mt-6 flex flex-col gap-2">
+          <a href="#hero" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-house text-gray-400 w-5"></i>
+            الرئيسية
+          </a>
+          <a href="#" data-modal-target="report-modal" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-rose-600 hover:bg-rose-50 transition-colors">
+            <i class="fa-solid fa-truck-medical text-rose-500 w-5"></i>
+            تقديم بلاغ سريع
+          </a>
+          <a href="#" data-modal-target="track-modal" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-magnifying-glass-location text-gray-400 w-5"></i>
+            متابعة حالة بلاغ
+          </a>
+          <a href="#about" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-heart-pulse text-gray-400 w-5"></i>
+            من نحن ورسالتنا
+          </a>
+          <a href="#services" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-stethoscope text-gray-400 w-5"></i>
+            خدمات المأوى
+          </a>
+          <a href="#" data-modal-target="volunteer-modal" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-handshake-angle text-gray-400 w-5"></i>
+            التطوع والوظائف
+          </a>
+          <a href="#" data-modal-target="activities-modal" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-charcoal-800 hover:bg-lotus-50 hover:text-lotus-700 transition-colors">
+            <i class="fa-solid fa-shield-dog text-gray-400 w-5"></i>
+            أنشطة المأوى الميدانية
+          </a>
+          <a href="#" data-modal-target="donate-modal" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-lotus-700 bg-lotus-50 hover:bg-lotus-100 transition-colors mt-2">
+            <i class="fa-solid fa-hand-holding-dollar text-lotus-600 w-5"></i>
+            تبرع الآن لدعم الإنقاذ
+          </a>
+        </nav>
+      </div>
+
+      <div class="pt-6 border-t border-gray-100 space-y-3">
+        <button data-modal-target="admin-modal" class="w-full py-2.5 px-4 text-xs font-bold text-center text-white bg-charcoal-900 hover:bg-charcoal-800 rounded-lg flex items-center justify-center gap-2">
+          <i class="fa-solid fa-lock text-lotus-400"></i>
+          <span>لوحة إدارة النظام</span>
+        </button>
+        <div class="text-center">
+          <p class="text-xs text-gray-400">الخط الساخن للبلاغات العاجلة 24/7</p>
+          <a href="tel:19875" class="text-sm font-bold text-lotus-700 mt-0.5 inline-block dir-ltr">19875</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======================================================================
+       2. القسم الافتتاحي (Full-Screen Hero with Background Carousel)
+       ====================================================================== -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-charcoal-950">
+    
+    <!-- سلايدر الصور في الخلفية مع تأثير انسيابي (Crossfade Transitions) -->
+    <div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
+      <!-- الشريحة 1: إسعاف ورعاية بيطرية للكلاب المنقذة -->
+      <div class="hero-slide active">
+        <img 
+          src="assets/images/hero-1.jpg" 
+          alt="فحص بيطري إنساني لكلب بلدي منقذ في مأوى بالقاهرة"
+          class="w-full h-full object-cover object-center"
+          referrerpolicy="no-referrer"
+        />
+      </div>
+
+      <!-- الشريحة 2: ملاذ شبرامنت وسقارة الطبيعي -->
+      <div class="hero-slide">
+        <img 
+          src="assets/images/hero-2.jpg" 
+          alt="ملاذ مفتوح للكلاب في منطقة سقارة وشبرامنت بمحيط أهرامات الجيزة"
+          class="w-full h-full object-cover object-center"
+          referrerpolicy="no-referrer"
+        />
+      </div>
+
+      <!-- الشريحة 3: متطوعو القاهرة ورعاية الكلاب والتأهيل -->
+      <div class="hero-slide">
+        <img 
+          src="assets/images/hero-3.jpg" 
+          alt="متطوع مصري يتفاعل برفق مع كلب تم إنقاذه في فناء المأوى"
+          class="w-full h-full object-cover object-center"
+          referrerpolicy="no-referrer"
+        />
+      </div>
+    </div>
+
+    <!-- طبقة التظليل الاحترافية (Dark Gradient + Soft Lotus Scrim Overlay) -->
+    <div class="absolute inset-0 z-10 hero-scrim-overlay"></div>
+    <div class="absolute inset-0 z-10 hero-lotus-accent-overlay"></div>
+
+    <!-- محتوى الهيرو المركزي -->
+    <div class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center text-white">
+      
+      <!-- شارة الإعلان الإنساني -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-semibold mb-6 shadow-inner animate-fade-in">
+        <span class="w-2 h-2 rounded-full bg-lotus-400 animate-pulse"></span>
+        <span>المبادرة الرقمية الإنسانية الأولى لرعاية وحماية الكلاب الضالة بالقاهرة الكبرى</span>
+      </div>
+
+      <!-- العنوان الرئيسي المؤثر -->
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight sm:leading-tight lg:leading-[1.18] text-white drop-shadow-md">
+        نحو قاهرة إنسانية خالية من معاناة الكلاب الضالة
+      </h1>
+
+      <!-- سطر توضيحي بلمسة اللوتس -->
+      <div class="mt-4 flex items-center justify-center gap-3 text-lotus-200 text-sm sm:text-lg font-semibold">
+        <span>إنقاذ وإسعاف عاجل</span>
+        <span class="text-white/40">·</span>
+        <span>برنامج تعقيم وتطعيم شامل (TNR)</span>
+        <span class="text-white/40">·</span>
+        <span>تبنٍ مسؤول ورعاية مستدامة</span>
+      </div>
+
+      <!-- الفقرة التعريفية الواقعية -->
+      <p class="mt-6 text-sm sm:text-base lg:text-lg text-slate-200 max-w-3xl mx-auto leading-relaxed font-normal">
+        المنظومة الرقمية الموحدة لتنسيق عمليات الإنقاذ الميداني، توثيق البلاغات، وإدارة ملاذات الإيواء في نطاق (شبرامنت، سقارة، وطريق مصر إسكندرية الصحراوي). نربط بلاغات المواطنين بفرق الاستجابة السريعة والعيادات المتنقلة على مدار 24 ساعة لوقف التسميم والتخلص غير الإنساني.
+      </p>
+
+      <!-- أزرار الوصول السريع والعمليات -->
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <!-- زر تقديم بلاغ سريع -->
+        <button data-modal-target="report-modal" class="btn-soft-pulse px-7 py-3.5 text-sm sm:text-base font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-xl shadow-lg shadow-lotus-900/30 transition-all duration-200 flex items-center gap-3">
+          <i class="fa-solid fa-truck-medical text-base"></i>
+          <span>تقديم بلاغ سريع عن حالة</span>
+        </button>
+
+        <!-- زر متابعة بلاغ -->
+        <button data-modal-target="track-modal" class="px-6 py-3.5 text-sm sm:text-base font-bold text-white bg-white/15 hover:bg-white/25 border border-white/30 backdrop-blur-md rounded-xl transition-all duration-200 flex items-center gap-2">
+          <i class="fa-solid fa-magnifying-glass text-sm text-lotus-300"></i>
+          <span>متابعة حالة بلاغ</span>
+        </button>
+
+        <!-- زر تبرع الآن -->
+        <button data-modal-target="donate-modal" class="px-6 py-3.5 text-sm sm:text-base font-bold text-charcoal-950 bg-white hover:bg-slate-100 rounded-xl shadow transition-all duration-200 flex items-center gap-2">
+          <i class="fa-solid fa-heart text-lotus-600"></i>
+          <span>تبرع للمأوى</span>
+        </button>
+      </div>
+
+      <!-- شريط مؤشرات السلايدر وأزرار التبديل -->
+      <div class="mt-12 flex items-center justify-center gap-4">
+        <button id="hero-prev" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/25 text-white/80 hover:text-white border border-white/20 backdrop-blur-sm flex items-center justify-center transition-all" aria-label="الشريحة السابقة">
+          <i class="fa-solid fa-chevron-right text-xs"></i>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button class="slider-dot active h-2.5 w-9 rounded-full bg-lotus-500" data-slide="0" aria-label="الانتقال للشريحة الأولى"></button>
+          <button class="slider-dot h-2.5 w-2.5 rounded-full bg-white/50 hover:bg-white/80" data-slide="1" aria-label="الانتقال للشريحة الثانية"></button>
+          <button class="slider-dot h-2.5 w-2.5 rounded-full bg-white/50 hover:bg-white/80" data-slide="2" aria-label="الانتقال للشريحة الثالثة"></button>
+        </div>
+
+        <button id="hero-next" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/25 text-white/80 hover:text-white border border-white/20 backdrop-blur-sm flex items-center justify-center transition-all" aria-label="الشريحة التالية">
+          <i class="fa-solid fa-chevron-left text-xs"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- شريط الثقة السريع أسفل الهيرو (Quick Pillars Banner) -->
+    <div class="absolute bottom-0 left-0 right-0 z-20 bg-charcoal-900/85 backdrop-blur-md border-t border-white/10 py-3 hidden md:block">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-4 gap-4 text-center text-xs text-slate-300">
+          <div class="flex items-center justify-center gap-2">
+            <i class="fa-solid fa-clock text-lotus-400"></i>
+            <span>استجابة ميدانية للطوارئ 24/7</span>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <i class="fa-solid fa-shield-virus text-lotus-400"></i>
+            <span>تطعيم مجاني ضد السعار والبارفو</span>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <i class="fa-solid fa-tree text-lotus-400"></i>
+            <span>ملاذ طبيعي آمن في شبرامنت وسقارة</span>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <i class="fa-solid fa-handshake text-lotus-400"></i>
+            <span>تبنٍ موثق تحت إشراف بيطري</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================================
+       3. قسم الإحصائيات الحية المتحركة (Animated Count-Up Numbers)
+       ====================================================================== -->
+  <section id="stats-section" class="py-16 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-bold text-lotus-700 uppercase tracking-wider">سجل الإنجاز الإنساني</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-charcoal-900 mt-1">أرقام صنعت فارقاً حقيقياً في شوارع القاهرة</h2>
+        <p class="text-sm text-slate-600 mt-2">بيانات حية موثقة من سجلات التدخل الميداني، العيادات البيطرية، ومراكز الإيواء والتأهيل.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- إحصائية 1 -->
+        <div class="stat-box p-6 rounded-2xl text-center">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-lotus-50 text-lotus-700 flex items-center justify-center mb-4">
+            <i class="fa-solid fa-kit-medical text-xl"></i>
+          </div>
+          <div class="text-3xl lg:text-4xl font-extrabold text-charcoal-950 num-counter" data-target="8650" data-prefix="+">0</div>
+          <p class="text-sm font-bold text-slate-800 mt-2">كلب تم إنقاذه وإسعافه</p>
+          <p class="text-xs text-slate-500 mt-1">حالات حوادث طرق وإصابات تم التعامل معها بالقاهرة</p>
+        </div>
+
+        <!-- إحصائية 2 -->
+        <div class="stat-box p-6 rounded-2xl text-center">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-lotus-50 text-lotus-700 flex items-center justify-center mb-4">
+            <i class="fa-solid fa-syringe text-xl"></i>
+          </div>
+          <div class="text-3xl lg:text-4xl font-extrabold text-charcoal-950 num-counter" data-target="14200" data-prefix="+">0</div>
+          <p class="text-sm font-bold text-slate-800 mt-2">عملية تعقيم وتطعيم (TNR)</p>
+          <p class="text-xs text-slate-500 mt-1">للحد الإنساني المستدام من التكاثر ومكافحة السعار</p>
+        </div>
+
+        <!-- إحصائية 3 -->
+        <div class="stat-box p-6 rounded-2xl text-center">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-lotus-50 text-lotus-700 flex items-center justify-center mb-4">
+            <i class="fa-solid fa-house-chimney-window text-xl"></i>
+          </div>
+          <div class="text-3xl lg:text-4xl font-extrabold text-charcoal-950 num-counter" data-target="3420" data-prefix="+">0</div>
+          <p class="text-sm font-bold text-slate-800 mt-2">حالة تبنٍ ناجحة</p>
+          <p class="text-xs text-slate-500 mt-1">كلاب مؤهلة سلوكياً وجدت عائلات محبة ومسؤولة</p>
+        </div>
+
+        <!-- إحصائية 4 -->
+        <div class="stat-box p-6 rounded-2xl text-center">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-lotus-50 text-lotus-700 flex items-center justify-center mb-4">
+            <i class="fa-solid fa-users text-xl"></i>
+          </div>
+          <div class="text-3xl lg:text-4xl font-extrabold text-charcoal-950 num-counter" data-target="1350" data-prefix="+">0</div>
+          <p class="text-sm font-bold text-slate-800 mt-2">متطوع وطبيب بيطري</p>
+          <p class="text-xs text-slate-500 mt-1">يشاركون في الحملات الميدانية وأيام التوعية والرعاية</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ======================================================================
+       4. قسم من نحن ورسالتنا (About Us Section with Real Cairo Context)
+       ====================================================================== -->
+  <section id="about" class="py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- العمود الأيمن: النص والقصة والرؤية -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-lotus-50 border border-lotus-200 text-lotus-800 text-xs font-bold">
+            <i class="fa-solid fa-landmark text-xs text-lotus-600"></i>
+            <span>من نحن · قصة تأسيس المأوى</span>
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-charcoal-900 leading-tight">
+            من مبادرة ميدانية بطريق سقارة إلى منظومة رقمية متكاملة لإنقاذ الكلاب بالعاصمة
+          </h2>
+
+          <p class="text-base text-slate-700 leading-relaxed">
+            تأسس مأوى القاهرة للكلاب الضالة كاستجابة إنسانية ملحة لمعاناة آلاف الكلاب في شوارع القاهرة والجيزة؛ حيث كانت تواجه حوادث السير، التسميم العشوائي، وظروف الطقس القاسية. بدأنا بجهود تطوعية متواضعة على حواف شبرامنت وطريق سقارة السياحي لإنقاذ الحالات الحرجة.
+          </p>
+
+          <p class="text-base text-slate-700 leading-relaxed">
+            واليوم، تحول المشروع إلى <strong>نظام رقمي لإدارة المأوى (Digital Shelter Management System)</strong> يربط بين المواطنين المبلغين، فرق الاستجابة الميدانية، والعيادات البيطرية المتطورة. نؤمن بأن الحيوان كائن يستحق الرحمة والحماية، وأن التوازن البيئي في القاهرة يتحقق بالعلم والتعقيم لا بالإبادة.
+          </p>
+
+          <!-- بطاقات الرؤية والرسالة -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <div class="flex items-center gap-2 mb-2">
+                <i class="fa-solid fa-eye text-lotus-700"></i>
+                <h3 class="text-sm font-bold text-charcoal-900">رؤيتنا الاستراتيجية</h3>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                قاهرة حضارية آمنة للمواطن ورحيمة بالحيوان، تختفي فيها ظاهرة الكلاب المشردة دون استخدام السموم، وتتحول إلى مجتمع يُقدّر الرفق بالحيوان.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <div class="flex items-center gap-2 mb-2">
+                <i class="fa-solid fa-bullseye text-lotus-700"></i>
+                <h3 class="text-sm font-bold text-charcoal-900">رسالتنا التنفيذية</h3>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                تطبيق البرنامج الوطني المعتمد علمياً (TNR: صيد، تعقيم، تطعيم، وإطلاق)، وتوفير ملاذات طبيعية مفتوحة للحالات غير القادرة على العيش بالشوارع.
+              </p>
+            </div>
+          </div>
+
+          <!-- نقاط القوة والاعتمادية -->
+          <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-6 text-xs text-slate-600">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-circle-check text-lotus-600"></i>
+              <span>إشراف بيطري معتمد من نقابة الأطباء البيطريين</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-circle-check text-lotus-600"></i>
+              <span>بروتوكولات منظمة الصحة العالمية (WHO) ضد السعار</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-circle-check text-lotus-600"></i>
+              <span>مساحات مفتوحة بدون أقفاص ضيقة</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- العمود الأيسر: تشكيلة الصور الواقعية وبطاقة الثقة -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-md lg:max-w-none">
+            <!-- الصورة الرئيسية: عيادة الفحص البيطري -->
+            <div class="overflow-hidden rounded-2xl shadow-xl border border-slate-200">
+              <img 
+                src="assets/images/about-vet.jpg" 
+                alt="طبيبة بيطرية مصرية تفحص كلباً بلدي في عيادة المأوى بالقاهرة"
+                class="w-full h-80 sm:h-96 object-cover object-center transform hover:scale-102 transition-transform duration-500"
+                referrerpolicy="no-referrer"
+              />
+            </div>
+
+            <!-- بطاقة التميز العائمة -->
+            <div class="absolute -bottom-6 -right-6 sm:bottom-4 sm:-right-4 bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-lg border border-lotus-200 max-w-xs text-right">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-lotus-500 text-white flex items-center justify-center shrink-0">
+                  <i class="fa-solid fa-award text-lg"></i>
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-charcoal-900">ملاذ شبرامنت الطبيعي</h4>
+                  <p class="text-[11px] text-slate-600 mt-0.5">15 فداناً مهيأة بحظائر شمسية، عيادة جراحية، وملاعب تدريب سلوكي</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ======================================================================
+       5. قسم خدمات وركائز المأوى الأساسية (Shelter Core Services)
+       ====================================================================== -->
+  <section id="services" class="py-24 bg-slate-50 border-t border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold text-lotus-700 uppercase tracking-wider">منظومة الرعاية المتكاملة</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-charcoal-900 mt-2">خدمات المأوى وبرامج التدخل الميداني</h2>
+        <p class="text-sm sm:text-base text-slate-600 mt-3">
+          نعمل وفق خطة علمية متناسقة تغطي مختلف مناطق القاهرة الكبرى والجيزة، من الإنقاذ الأولي وحتى التبني أو الإطلاق الآمن.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- خدمة 1: إنقاذ وإسعاف الطوارئ -->
+        <div class="service-card bg-white p-7 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-13 h-13 w-12 h-12 rounded-xl bg-lotus-100 text-lotus-700 flex items-center justify-center mb-5 text-xl">
+              <i class="fa-solid fa-truck-medical"></i>
+            </div>
+            <h3 class="text-lg font-bold text-charcoal-900 mb-2">إنقاذ وإسعاف الطوارئ (24/7)</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              أسطول سيارات إنقاذ مجهزة بأقفاص آمنة ومعدات إسعاف بيطري أولي، مخصصة لحالات حوادث الطرق والكسور والإصابات الخطرة بجميع أحياء القاهرة.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-500 font-medium">استجابة سريعة بالبث المباشر</span>
+            <button data-modal-target="report-modal" class="text-lotus-700 font-bold hover:text-lotus-800 flex items-center gap-1">
+              <span>إبلاغ الآن</span>
+              <i class="fa-solid fa-arrow-left text-[10px]"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- خدمة 2: البرنامج الوطني للتعقيم والتطعيم TNR -->
+        <div class="service-card bg-white p-7 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-lotus-100 text-lotus-700 flex items-center justify-center mb-5 text-xl">
+              <i class="fa-solid fa-syringe"></i>
+            </div>
+            <h3 class="text-lg font-bold text-charcoal-900 mb-2">برنامج التعقيم والتطعيم الوطني (TNR)</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              الحل الإنساني الوحيد المثبت عالمياً للحد من تكاثر الكلاب: صيد رحيم، تعقيم جراحي معقم، تطعيم شامل ضد السعار مع وضع علامة أذن موحدة (Ear Notch).
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-500 font-medium">وفق معايير الصحة العالمية</span>
+            <span class="text-lotus-700 font-bold">14,200+ حالة</span>
+          </div>
+        </div>
+
+        <!-- خدمة 3: الملاذ الطبيعي والتأهيل السلوكي -->
+        <div class="service-card bg-white p-7 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-lotus-100 text-lotus-700 flex items-center justify-center mb-5 text-xl">
+              <i class="fa-solid fa-shield-dog"></i>
+            </div>
+            <h3 class="text-lg font-bold text-charcoal-900 mb-2">الملاذ الطبيعي والتأهيل السلوكي</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              مأوى شبرامنت وسقارة المفتوح للحالات ذات الإعاقة الدائمة، كبار السن، والجراء اليتيمة. مساحات ترابية ورملية مفتوحة تساعد الحيوان على استعادة فطرته الآمنة.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-500 font-medium">سعة استيعابية 1200+ كلب</span>
+            <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">بيئة حرة مفتوحة</span>
+          </div>
+        </div>
+
+        <!-- خدمة 4: التبني المسؤول والمتابعة -->
+        <div class="service-card bg-white p-7 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-lotus-100 text-lotus-700 flex items-center justify-center mb-5 text-xl">
+              <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <h3 class="text-lg font-bold text-charcoal-900 mb-2">برنامج التبني الأخلاقي المسؤول</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              نظام فحص وتوفيق بين العائلات والكلاب المؤهلة بعد فحص بيطري وتطعيمات كاملة، مع متابعة دورية وتقديم استشارات تدريبية مجانية لضمان استقرار الحالة.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-500 font-medium">تبنٍ مجاني بدون رسوم</span>
+            <button data-modal-target="activities-modal" class="text-lotus-700 font-bold hover:text-lotus-800 flex items-center gap-1">
+              <span>عرض المرشحين</span>
+              <i class="fa-solid fa-arrow-left text-[10px]"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- خدمة 5: العيادة البيطرية الميدانية -->
+        <div class="service-card bg-white p-7 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-lotus-100 text-lotus-700 flex items-center justify-center mb-5 text-xl">
+              <i class="fa-solid fa-stethoscope"></i>
+            </div>
+            <h3 class="text-lg font-bold text-charcoal-900 mb-2">العيادة البيطرية المتنقلة</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              حملات ميدانية أسبوعية في المناطق ذات الكثافة العالية (المعادي، التجمع، حلوان، الجيزة) لتقديم التطعيم ضد السعار وعلاج الأمراض الجلدية في موقعها.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-500 font-medium">فريق أطباء مقيمين</span>
+            <span class="text-lotus-700 font-bold">جدول أسبوعي</span>
+          </div>
+        </div>
+
+        <!-- خدمة 6: التوعية المجتمعية والمدارس -->
+        <div class="service-card bg-white p-7 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-lotus-100 text-lotus-700 flex items-center justify-center mb-5 text-xl">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3 class="text-lg font-bold text-charcoal-900 mb-2">التوعية المجتمعية والمدارس</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              ورش عمل في مدارس وجامعات القاهرة لتعليم الأطفال والشباب كيفية التعامل الآمن مع كلاب الشارع، تفادي العض، وفهم لغة جسد الحيوان ونشر ثقافة الرحمة.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-500 font-medium">بناء جيل رحيم بالحيوان</span>
+            <button data-modal-target="volunteer-modal" class="text-lotus-700 font-bold hover:text-lotus-800 flex items-center gap-1">
+              <span>انضم للمرشدين</span>
+              <i class="fa-solid fa-arrow-left text-[10px]"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ======================================================================
+       6. تذييل الصفحة الأنيق (Charcoal Black Footer)
+       ====================================================================== -->
+  <footer class="bg-charcoal-950 text-slate-300 border-t border-charcoal-800 pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-charcoal-800">
+        
+        <!-- العمود 1: هوية المأوى والرسالة -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-lotus-600 text-white flex items-center justify-center">
+              <i class="fa-solid fa-paw text-lg"></i>
+            </div>
+            <div>
+              <span class="text-base font-extrabold text-white block">مأوى القاهرة للكلاب الضالة</span>
+              <span class="text-xs text-lotus-300">النظام الرقمي الموحد لإدارة المأوى والبلاغات</span>
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm">
+            مؤسسة أهلية غير هادفة للربح، تعمل بترخيص رسمي لمكافحة القسوة ضد الحيوانات، وتطبيق استراتيجية التعقيم والتطعيم الوطني (TNR) المعتمدة بالقاهرة الكبرى ومحافظة الجيزة.
+          </p>
+
+          <div class="pt-2 flex items-center gap-3 text-slate-400 text-sm">
+            <a href="#" class="w-8 h-8 rounded-lg bg-charcoal-900 border border-charcoal-800 flex items-center justify-center hover:text-lotus-400 hover:border-lotus-500/50 transition-colors" aria-label="فيسبوك">
+              <i class="fa-brands fa-facebook-f text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-lg bg-charcoal-900 border border-charcoal-800 flex items-center justify-center hover:text-lotus-400 hover:border-lotus-500/50 transition-colors" aria-label="إنستغرام">
+              <i class="fa-brands fa-instagram text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-lg bg-charcoal-900 border border-charcoal-800 flex items-center justify-center hover:text-lotus-400 hover:border-lotus-500/50 transition-colors" aria-label="واتساب">
+              <i class="fa-brands fa-whatsapp text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-lg bg-charcoal-900 border border-charcoal-800 flex items-center justify-center hover:text-lotus-400 hover:border-lotus-500/50 transition-colors" aria-label="يوتيوب">
+              <i class="fa-brands fa-youtube text-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- العمود 2: روابط سريعة للخدمات -->
+        <div>
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4 border-r-2 border-lotus-500 pr-2">
+            خدمات البلاغات والإنقاذ
+          </h4>
+          <ul class="space-y-2.5 text-xs text-slate-400">
+            <li><a href="#" data-modal-target="report-modal" class="hover:text-lotus-300 transition-colors">تقديم بلاغ إسعاف عاجل</a></li>
+            <li><a href="#" data-modal-target="track-modal" class="hover:text-lotus-300 transition-colors">الاستعلام عن حالة بلاغ</a></li>
+            <li><a href="#services" class="hover:text-lotus-300 transition-colors">طلب حملة تعقيم للمنطقة (TNR)</a></li>
+            <li><a href="#" data-modal-target="activities-modal" class="hover:text-lotus-300 transition-colors">قائمة الكلاب المتاحة للتبني</a></li>
+            <li><a href="#" data-modal-target="admin-modal" class="hover:text-lotus-300 transition-colors">بوابة المسعفين والأطباء</a></li>
+          </ul>
+        </div>
+
+        <!-- العمود 3: مقرات ومواقع المأوى -->
+        <div>
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4 border-r-2 border-lotus-500 pr-2">
+            المواقع والملاذات
+          </h4>
+          <ul class="space-y-3 text-xs text-slate-400 leading-relaxed">
+            <li>
+              <strong class="text-slate-200 block">الملاذ المركزي (شبرامنت):</strong>
+              طريق سقارة السياحي، جنوب الجيزة (15 فداناً).
+            </li>
+            <li>
+              <strong class="text-slate-200 block">مركز التدخل السريع (المعادي):</strong>
+              نقطة تمركز سيارات الإسعاف لحالات جنوب وشرق القاهرة.
+            </li>
+            <li>
+              <strong class="text-slate-200 block">مكتب إدارة العمليات (التجمع الخامس):</strong>
+              وحدة الرصد الرقمي والتنسيق اللوجستي.
+            </li>
+          </ul>
+        </div>
+
+        <!-- العمود 4: بيانات الاتصال والطوارئ -->
+        <div>
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4 border-r-2 border-lotus-500 pr-2">
+            الاتصال وساعات الزيارة
+          </h4>
+          <div class="space-y-3 text-xs text-slate-400">
+            <div>
+              <span class="text-slate-400 block">الخط الساخن الموحد للطوارئ:</span>
+              <a href="tel:19875" class="text-base font-extrabold text-lotus-400 hover:text-lotus-300 transition-colors dir-ltr inline-block">19875 (24 ساعة)</a>
+            </div>
+            <div>
+              <span class="text-slate-400 block">واتساب البلاغات والصور:</span>
+              <a href="https://wa.me/201002345678" target="_blank" class="text-xs font-bold text-slate-200 hover:text-white dir-ltr inline-block">+20 100 234 5678</a>
+            </div>
+            <div>
+              <span class="text-slate-400 block">البريد الإلكتروني الرسمي:</span>
+              <span class="text-xs text-slate-300 font-mono">rescue@cairoshelter.eg</span>
+            </div>
+            <div class="pt-1">
+              <span class="text-lotus-300 font-bold block">مواعيد الزيارة والتطوع:</span>
+              <span>الجمعة والسبت من 9:00 ص إلى 4:00 م (بحجز مسبق)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- السطر السفلي وحقوق الملكية -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <p>جميع الحقوق محفوظة © 2026 النظام الرقمي لإدارة مأوى الكلاب الضالة بالقاهرة. مبادرة إنسانية مسجلة رسمياً.</p>
+        <div class="flex items-center gap-4 text-slate-400">
+          <span>الشفافية والحوكمة</span>
+          <span>·</span>
+          <span>سياسة الخصوصية</span>
+          <span>·</span>
+          <a href="#" data-modal-target="admin-modal" class="text-lotus-400 hover:underline">دخول المشرفين</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ======================================================================
+       7. النوافذ المنبثقة التفاعلية (Modals & Dialogs)
+       ====================================================================== -->
+
+  <!-- مودال 1: تقديم بلاغ سريع -->
+  <div id="report-modal" class="modal-overlay fixed inset-0 z-[70] bg-charcoal-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="modal-content bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-right max-h-[90vh] flex flex-col">
+      
+      <!-- رأس المودال -->
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center">
+            <i class="fa-solid fa-truck-medical text-base"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-charcoal-900">تقديم بلاغ سريع عن حالة كلب</h3>
+            <p class="text-xs text-slate-500">توجيه البلاغ فوراً لأقرب سيارة إسعاف ميدانية في نطاق القاهرة</p>
+          </div>
+        </div>
+        <button data-modal-close class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg focus:outline-none">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- محتوى النموذج -->
+      <div class="p-6 overflow-y-auto space-y-4">
+        
+        <div class="flex items-center justify-between bg-lotus-50/70 p-3 rounded-xl border border-lotus-100 text-xs">
+          <span class="text-lotus-900 font-medium">لتسهيل الاختبار السريع للمنظومة:</span>
+          <button type="button" id="fill-sample-report-btn" class="px-2.5 py-1 text-xs font-bold bg-lotus-600 text-white hover:bg-lotus-700 rounded-lg transition-colors">
+            تعبئة بيانات تجريبية
+          </button>
+        </div>
+
+        <form id="quick-report-form" class="space-y-4">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">اسم المُبلّغ (اختياري)</label>
+              <input type="text" name="reporter_name" placeholder="مثال: كريم السيد" class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lotus-500 focus:border-transparent" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">رقم الهاتف للتواصل <span class="text-rose-500">*</span></label>
+              <input type="tel" name="reporter_phone" required placeholder="010xxxxxxxx" class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lotus-500 focus:border-transparent dir-ltr text-right" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">المنطقة / الحي بالقاهرة <span class="text-rose-500">*</span></label>
+              <select name="district" required class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lotus-500 bg-white">
+                <option value="">اختر الحي أو المنطقة</option>
+                <option value="المعادي">المعادي ودجلة</option>
+                <option value="الزمالك">الزمالك وجاردن سيتي</option>
+                <option value="التجمع الخامس">القاهرة الجديدة والتجمع</option>
+                <option value="مصر الجديدة">مصر الجديدة والنزهة</option>
+                <option value="مدينة نصر">مدينة نصر</option>
+                <option value="الجيزة">الجيزة والدقي والمهندسين</option>
+                <option value="الشيخ زايد">الشيخ زايد و 6 أكتوبر</option>
+                <option value="شبرامنت وسقارة">شبرامنت ومحيط سقارة</option>
+                <option value="طريق مصر إسكندرية">طريق مصر إسكندرية الصحراوي</option>
+                <option value="وسط البلد">وسط البلد وشبرا</option>
+                <option value="أخرى">منطقة أخرى بالقاهرة الكبرى</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">حالة الكلب الظاهرة <span class="text-rose-500">*</span></label>
+              <select name="dog_condition" required class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lotus-500 bg-white">
+                <option value="">اختر الحالة</option>
+                <option value="حادث صدم / كسر عاجل">حادث صدم أو كسر (طارئ جداً)</option>
+                <option value="إصابة أو عرج واضح يحتاج إسعافاً">إصابة أو جرح ظاهر</option>
+                <option value="كلبة مع جراء صغيرة في مكان خطر">كلبة مع جراء حديثة الولادة</option>
+                <option value="مرض جلدي أو هزال شديد">مرض جلدي أو جرب شديد</option>
+                <option value="طلب تطعيم وتعقيم (TNR)">طلب تطعيم وتعقيم لمجموعة مسالمة</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">العنوان التفصيلي والعلامة المميزة <span class="text-rose-500">*</span></label>
+            <input type="text" name="location_detail" required placeholder="اسم الشارع، رقم العقار أو أمام متجر/محطة وقود معروفة" class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lotus-500" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">ملاحظات إضافية أو وصف الحالة</label>
+            <textarea name="notes" rows="2" placeholder="أية تفاصيل تساعد فريق الإنقاذ (لون الكلب، مدى استجابته، سلوكه...)" class="w-full text-xs px-3.5 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lotus-500"></textarea>
+          </div>
+
+          <div class="pt-2 flex items-center justify-end gap-3">
+            <button type="button" data-modal-close class="px-4 py-2.5 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
+              إلغاء
+            </button>
+            <button type="submit" class="px-6 py-2.5 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-lg shadow-sm transition-colors flex items-center gap-2">
+              <i class="fa-solid fa-paper-plane text-xs"></i>
+              <span>إرسال البلاغ فوراً</span>
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- مودال 2: نتيجة البلاغ وتأكيد الاستلام -->
+  <div id="ticket-result-modal" class="modal-overlay fixed inset-0 z-[75] bg-charcoal-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="modal-content bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 p-6 text-center">
+      <div class="w-16 h-16 mx-auto rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl mb-4">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="text-lg font-bold text-charcoal-900">تم تسجيل وتوجيه البلاغ بنجاح</h3>
+      <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+        تم إرسال إحداثيات الحالة إلى غرفة عمليات القاهرة الميدانية وأقرب سيارة إسعاف بيطرية في منطقتك.
+      </p>
+
+      <div class="my-5 p-4 rounded-xl bg-slate-50 border border-slate-200 text-center">
+        <span class="text-xs text-slate-500 block mb-1">رمز متابعة البلاغ المرجعي:</span>
+        <span id="result-ticket-code" class="text-xl font-mono font-black text-lotus-700 tracking-wider">CAI-2026-8942</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button data-modal-close class="w-full py-2.5 text-xs font-bold text-white bg-charcoal-900 hover:bg-charcoal-800 rounded-lg transition-colors">
+          حسناً، تم الحفظ
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- مودال 3: متابعة حالة بلاغ -->
+  <div id="track-modal" class="modal-overlay fixed inset-0 z-[70] bg-charcoal-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="modal-content bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-right flex flex-col">
+      
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-lotus-100 text-lotus-700 flex items-center justify-center">
+            <i class="fa-solid fa-magnifying-glass text-base"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-charcoal-900">متابعة حالة بلاغ ميداني</h3>
+            <p class="text-xs text-slate-500">تتبع مسار فرقة الإنقاذ والإسعاف البيطري للحالة</p>
+          </div>
+        </div>
+        <button data-modal-close class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg focus:outline-none">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-6">
+        <form id="track-report-form" class="space-y-3">
+          <label class="block text-xs font-bold text-slate-700">أدخل رقم البلاغ أو الرمز المرجعي</label>
+          <div class="flex items-center gap-2">
+            <input 
+              type="text" 
+              id="track-ticket-input" 
+              placeholder="مثال: CAI-2026-8942" 
+              class="flex-1 text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lotus-500 uppercase font-mono"
+            />
+            <button type="submit" class="px-5 py-2.5 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-lg transition-colors whitespace-nowrap">
+              بحث
+            </button>
+          </div>
+        </form>
+
+        <div class="mt-4 flex items-center gap-2 text-xs text-slate-500">
+          <span>أمثلة سريعة للتجربة:</span>
+          <button type="button" class="sample-ticket-btn text-xs text-lotus-700 underline font-mono" data-code="CAI-2026-8942">CAI-2026-8942 (حالة حرجة)</button>
+          <span>·</span>
+          <button type="button" class="sample-ticket-btn text-xs text-lotus-700 underline font-mono" data-code="CAI-2026-7811">CAI-2026-7811 (تعقيم TNR)</button>
+        </div>
+
+        <!-- صندوق نتيجة التتبع -->
+        <div id="tracking-result-box" class="hidden"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- مودال 4: لوحة الإدارة (Admin Login Portal) -->
+  <div id="admin-modal" class="modal-overlay fixed inset-0 z-[70] bg-charcoal-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="modal-content bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-right">
+      
+      <div class="p-6 text-center border-b border-slate-100 bg-charcoal-950 text-white relative">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-lotus-600 text-white flex items-center justify-center text-xl mb-3 shadow-md shadow-lotus-900/40">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h3 class="text-lg font-bold text-white">بوابة مشرفي وفرق المأوى</h3>
+        <p class="text-xs text-slate-300 mt-1">تسجيل دخول مسؤولي النظام، الأطباء البيطريين، ومشرفي العمليات</p>
+      </div>
+
+      <div class="p-6 space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">اسم المستخدم أو البريد الوظيفي</label>
+          <input type="text" value="dispatcher@cairoshelter.eg" readonly class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-200 bg-slate-50 text-slate-600 dir-ltr text-right font-mono" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">كلمة المرور الأمنية</label>
+          <input type="password" value="••••••••••••" readonly class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-200 bg-slate-50 text-slate-600 dir-ltr text-right font-mono" />
+        </div>
+
+        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-start gap-2">
+          <i class="fa-solid fa-circle-exclamation text-amber-600 mt-0.5"></i>
+          <span>تنبيه: يجري تجهيز لوحة التحكم الإدارية الكاملة للمرحلة الثانية من تطوير المشروع.</span>
+        </div>
+
+        <div class="space-y-2 pt-2">
+          <button id="admin-demo-login-btn" type="button" class="w-full py-2.5 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-lg shadow transition-colors flex items-center justify-center gap-2">
+            <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
+            <span>دخول تجريبي للوحة الإدارة</span>
+          </button>
+          
+          <button data-modal-close type="button" class="w-full py-2.5 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
+            إغلاق
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- مودال 5: التبرع لدعم عمليات المأوى -->
+  <div id="donate-modal" class="modal-overlay fixed inset-0 z-[70] bg-charcoal-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="modal-content bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-right max-h-[90vh] flex flex-col">
+      
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-lotus-100 text-lotus-700 flex items-center justify-center">
+            <i class="fa-solid fa-hand-holding-heart text-base"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-charcoal-900">دعم وتبرع لمأوى القاهرة للكلاب</h3>
+            <p class="text-xs text-slate-500">مساهمتك تنقذ روحاً وتوفر طعاماً وعلاجاً جراحياً فورياً</p>
+          </div>
+        </div>
+        <button data-modal-close class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg focus:outline-none">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-6 overflow-y-auto space-y-4">
+        
+        <!-- بطاقة إنستاباي InstaPay -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xs">
+              Insta
+            </div>
+            <div>
+              <span class="text-xs font-bold text-slate-900 block">إنستاباي (InstaPay GPA)</span>
+              <span class="text-xs font-mono text-slate-600 dir-ltr inline-block">cairoshelter@instapay</span>
+            </div>
+          </div>
+          <button data-copy-target="cairoshelter@instapay" class="px-3 py-1.5 text-xs font-bold text-lotus-700 bg-white border border-lotus-200 rounded-lg hover:bg-lotus-50 transition-colors">
+            نسخ المعرف
+          </button>
+        </div>
+
+        <!-- بطاقة فودافون كاش ومحافظ المحمول -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold text-xs">
+              Cash
+            </div>
+            <div>
+              <span class="text-xs font-bold text-slate-900 block">فودافون كاش ومحافظ المحمول</span>
+              <span class="text-xs font-mono text-slate-600 dir-ltr inline-block">0100 234 5678</span>
+            </div>
+          </div>
+          <button data-copy-target="01002345678" class="px-3 py-1.5 text-xs font-bold text-lotus-700 bg-white border border-lotus-200 rounded-lg hover:bg-lotus-50 transition-colors">
+            نسخ الرقم
+          </button>
+        </div>
+
+        <!-- بطاقة الحساب البنكي -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">
+              Bank
+            </div>
+            <div>
+              <span class="text-xs font-bold text-slate-900 block">بنك مصر - حساب التبرعات المعتمد</span>
+              <span class="text-xs font-mono text-slate-600 dir-ltr inline-block">IBAN: EG450002000001234567890123</span>
+            </div>
+          </div>
+          <button data-copy-target="EG450002000001234567890123" class="px-3 py-1.5 text-xs font-bold text-lotus-700 bg-white border border-lotus-200 rounded-lg hover:bg-lotus-50 transition-colors">
+            نسخ الـ IBAN
+          </button>
+        </div>
+
+        <!-- تبرع عيني بالأغذية والمستلزمات -->
+        <div class="p-4 rounded-xl border border-lotus-200 bg-lotus-50/60">
+          <h4 class="text-xs font-bold text-lotus-900 mb-1">
+            <i class="fa-solid fa-bowl-food text-lotus-600 ml-1"></i>
+            التبرع العيني بأغذية ومستلزمات بيطرية
+          </h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            نستقبل أكياس الدراي فود (Dry Food)، الشاش والضمادات، البيتادين، ومضادات الطفيليات مباشرة في مقر المأوى بشبرامنت أو بنقاط الاستلام في المعادي ومصر الجديدة.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- مودال 6: التطوع والوظائف بالمأوى -->
+  <div id="volunteer-modal" class="modal-overlay fixed inset-0 z-[70] bg-charcoal-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="modal-content bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-right max-h-[90vh] flex flex-col">
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-lotus-100 text-lotus-700 flex items-center justify-center">
+            <i class="fa-solid fa-handshake-angle text-base"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-charcoal-900">التطوع والانضمام لفريق المأوى</h3>
+            <p class="text-xs text-slate-500">ساهم بوقتك وخبرتك لإنقاذ ورعاية الحيوانات بالعاصمة</p>
+          </div>
+        </div>
+        <button data-modal-close class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg focus:outline-none">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-6 overflow-y-auto space-y-4">
+        <div class="space-y-3">
+          <div class="p-3.5 rounded-xl border border-slate-200 hover:border-lotus-300 transition-colors">
+            <span class="text-xs font-bold text-lotus-700 block mb-1">01. التطوع الميداني وعناية نهاية الأسبوع</span>
+            <p class="text-xs text-slate-600 leading-relaxed">المساعدة في تمشية الكلاب، تنظيف الحظائر، إطعام الجراء، وتقديم الرعاية العاطفية بمأوى شبرامنت كل جمعة وسبت.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 hover:border-lotus-300 transition-colors">
+            <span class="text-xs font-bold text-lotus-700 block mb-1">02. متطوعون بيطريون وطلاب كليات الطب البيطري</span>
+            <p class="text-xs text-slate-600 leading-relaxed">تدريب عملي ومشاركة في جراحات التعقيم، التطعيم ضد السعار، ومتابعة الحالات المرضية بالعيادة المركزية.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 hover:border-lotus-300 transition-colors">
+            <span class="text-xs font-bold text-lotus-700 block mb-1">03. التوعية الرقمية والتصوير وتوثيق الحالات</span>
+            <p class="text-xs text-slate-600 leading-relaxed">تصوير الكلاب الجاهزة للتبني بجودة عالية، كتابة قصص نجاحها، والمساعدة في إدارة منصات التواصل.</p>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <button onclick="showToast('سيتم فتح استمارة التسجيل المفصلة في المرحلة الثانية من النظام', 'info')" class="w-full py-2.5 text-xs font-bold text-white bg-lotus-600 hover:bg-lotus-700 rounded-lg shadow transition-colors">
+            تسجيل اهتمام بالانضمام للتطوع
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- مودال 7: أنشطة المأوى الميدانية -->
+  <div id="activities-modal" class="modal-overlay fixed inset-0 z-[70] bg-charcoal-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="modal-content bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-right max-h-[90vh] flex flex-col">
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-lotus-100 text-lotus-700 flex items-center justify-center">
+            <i class="fa-solid fa-calendar-check text-base"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-charcoal-900">أنشطة المأوى والفعاليات القادمة</h3>
+            <p class="text-xs text-slate-500">مواعيد القوافل الميدانية وأيام التبني المفتوحة</p>
+          </div>
+        </div>
+        <button data-modal-close class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg focus:outline-none">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-6 overflow-y-auto space-y-4">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-charcoal-900">يوم التبني المفتوح (Adoption Day)</span>
+            <span class="text-[11px] font-semibold text-lotus-700 bg-lotus-50 px-2 py-0.5 rounded">الجمعة القادمة</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            فرصة لمقابلة أكثر من 40 كلباً بلدي تم تطعيمهم وتأهيلهم سلوكياً، في حديقة المأوى بشبرامنت مع أنشطة عائلية للأطفال.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-charcoal-900">قافلة التطعيم المجاني بحي المعادي</span>
+            <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">الأحد القادم</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            تطعيم كلاب الشارع بالتعاون مع لجان أهالي المعادي ضد السعار ووضع علامات الأذن المعتمدة.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-charcoal-900">ورشة الرفق بالحيوان في مدارس الجيزة</span>
+            <span class="text-[11px] font-semibold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">حملة مستمرة</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            محاضرات تثقيفية لطلاب المدارس الابتدائية والإعدادية حول التعامل الآمن ومنع العنف ضد الحيوانات المشردة.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript الرئيسي -->
+  <script src="js/script.js"></script>
+
+</body>
 </html>

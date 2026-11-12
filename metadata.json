@@ -1,0 +1,8 @@
+{
+  "name": "Digital Shelter Management System - Cairo",
+  "description": "النظام الرقمي لإدارة مأوى الكلاب الضالة بالقاهرة - المرحلة الأولى: منصة إنسانية تفاعلية لإدارة البلاغات، الرعاية البيطرية، التبني المسؤول، وحملات التعقيم والتطعيم.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ],
+  "permissions": []
+}
