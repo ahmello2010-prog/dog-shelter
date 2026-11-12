@@ -28,6 +28,210 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* أساسيات تمنع العناصر المرنة والصور من فرض عرض أكبر من شاشة الهاتف. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    width: 100%;
+    overflow-x: clip;
+  }
+
+  /* ضمان انكماش أعمدة Flex/Grid بدلاً من دفع الصفحة خارج الشاشة. */
+  main,
+  section,
+  article,
+  header,
+  footer,
+  .max-w-7xl,
+  .max-w-6xl,
+  .max-w-5xl,
+  .max-w-4xl {
+    min-width: 0;
+  }
+
+  h1 {
+    overflow-wrap: anywhere;
+  }
+
+  /* جداول لوحة التحكم تحتفظ بأعمدتها وتصبح قابلة للتمرير داخل البطاقة. */
+  .overflow-x-auto,
+  .overflow-x-scroll {
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    max-width: 100%;
+  }
+
+  /* النوافذ المنبثقة تترك هامشاً آمناً وتسمح بالتمرير على الشاشات القصيرة. */
+  .modal-overlay {
+    padding: 0.75rem !important;
+    align-items: center;
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100dvh - 1.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .leaflet-popup-content {
+    width: min(260px, calc(100vw - 72px)) !important;
+  }
+
+  #operations-map-frame {
+    width: min(100%, 360px);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin-inline: auto;
+  }
+
+  #operations-map-frame.map-frame-expanded {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    aspect-ratio: auto;
+    margin: 0;
+  }
+
+  #operations-map-frame.map-frame-expanded #open-map-modal {
+    display: none;
+  }
+
+  #map-modal-stage {
+    min-height: 0;
+  }
+
+  #operations-map-frame.map-frame-expanded > .absolute.bottom-4.right-4 {
+    display: block;
+    max-width: calc(100% - 1.5rem);
+    font-size: 0.65rem;
+  }
+
+  #toast-notification {
+    left: 0.75rem !important;
+    right: 0.75rem !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  /* ضغط المسافات في لوحة الإدارة التي تتحول إلى تخطيط رأسي على الهاتف. */
+  #admin-sidebar {
+    max-height: 42dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  #admin-sidebar > div:first-child {
+    padding-bottom: 0.75rem;
+  }
+
+  body > div.flex-1 > header {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+  }
+
+  body > div.flex-1 > header > div {
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  body > div.flex-1 > main {
+    padding: 1rem;
+  }
+
+  /* تخفيف ارتفاع المساحات الكبيرة والعناوين على الهاتف. */
+  section.py-24 {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  section.py-20 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .modal-content .px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* مقياس أكثر هدوءاً للعناوين التي تبدو ضخمة على شاشة الهاتف. */
+  [class~="text-xl"] { font-size: 1.1rem; }
+  [class~="text-2xl"] { font-size: 1.3rem; }
+  [class~="text-3xl"] { font-size: 1.55rem; }
+  [class~="text-4xl"] { font-size: 1.8rem; }
+  [class~="text-5xl"] { font-size: 2rem; }
+  [class~="text-6xl"] { font-size: 2.2rem; }
+
+  /* تقليل الحشو داخل البطاقات والنوافذ مع الحفاظ على مساحات التنفس. */
+  [class~="p-4"] { padding: 0.75rem; }
+  [class~="p-5"] { padding: 0.875rem; }
+  [class~="p-6"] { padding: 1rem; }
+  [class~="px-4"] { padding-left: 0.7rem; padding-right: 0.7rem; }
+  [class~="px-5"] { padding-left: 0.75rem; padding-right: 0.75rem; }
+  [class~="px-6"] { padding-left: 0.85rem; padding-right: 0.85rem; }
+  [class~="px-7"] { padding-left: 0.9rem; padding-right: 0.9rem; }
+  [class~="py-3"] { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  [class~="py-3.5"] { padding-top: 0.55rem; padding-bottom: 0.55rem; }
+  [class~="py-2.5"] { padding-top: 0.4rem; padding-bottom: 0.4rem; }
+
+  /* الأزرار وروابط الإجراءات تصبح أقصر مع وضوح النص وسهولة لمسها. */
+  button,
+  a[class*="px-"][class*="py-"] {
+    font-size: 0.82rem !important;
+    line-height: 1.4;
+  }
+
+  [class~="gap-6"] { gap: 1rem; }
+  [class~="gap-8"] { gap: 1.25rem; }
+}
+
+.map-modal:not(.hidden) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-modal-panel {
+  height: min(92dvh, 900px);
+}
+
+@media (max-width: 400px) {
+  .modal-content > .px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .modal-content.p-6 {
+    padding: 1rem;
+  }
+
+  .leaflet-popup-content {
+    width: min(230px, calc(100vw - 72px)) !important;
+  }
+}
+
 /* شريط التمرير المخصص */
 ::-webkit-scrollbar {
   width: 9px;
@@ -117,14 +321,30 @@ body {
   height: 100%;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1200ms cubic-bezier(0.4, 0, 0.2, 1), transform 7000ms ease-out;
+  transition:
+    opacity 1600ms ease-in-out,
+    transform 7000ms ease-out,
+    visibility 0s linear 1600ms;
   transform: scale(1.04);
+  will-change: opacity, transform;
 }
 
 .hero-slide.active {
   opacity: 1;
   visibility: visible;
   transform: scale(1);
+  transition-delay: 0s, 0s, 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide {
+    transition: opacity 250ms ease, visibility 0s linear 250ms;
+    transform: none;
+  }
+
+  .hero-slide.active {
+    transition-delay: 0s, 0s;
+  }
 }
 
 /* مؤشرات التقدم للسلايدر */

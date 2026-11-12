@@ -321,7 +321,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
         <!-- القائمة الجانبية للمواقع وسجل العمليات (4 أعمدة) -->
-        <div class="lg:col-span-4 flex flex-col">
+        <div class="lg:col-span-4 flex flex-col order-2 lg:order-1">
           <div class="bg-white border border-slate-200 rounded-2xl p-4 flex-1 flex flex-col max-h-[620px] shadow-sm">
             <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
               <div class="flex items-center gap-2">
@@ -350,9 +350,14 @@
         </div>
 
         <!-- حاوية خريطة Leaflet (8 أعمدة) -->
-        <div class="lg:col-span-8 relative">
-          <div class="relative w-full h-[620px] rounded-2xl overflow-hidden border border-slate-200 shadow-md">
+        <div class="lg:col-span-8 relative order-1 lg:order-2">
+          <div id="operations-map-frame" class="relative w-full h-[620px] rounded-2xl overflow-hidden border border-slate-200 shadow-md">
             <div id="cairo-operations-map" class="w-full h-full"></div>
+
+            <button id="open-map-modal" type="button" class="absolute top-3 left-3 z-[500] sm:hidden inline-flex items-center gap-2 rounded-xl bg-white/95 px-3 py-2 text-xs font-bold text-charcoal-900 shadow-lg border border-slate-200" aria-label="فتح الخريطة بحجم كبير">
+              <i class="fa-solid fa-expand text-lotus-600"></i>
+              تكبير الخريطة
+            </button>
             
             <!-- وسيلة إيضاح الخريطة العائمة -->
             <div class="absolute bottom-4 right-4 z-[400] bg-white/95 backdrop-blur-md p-3.5 rounded-xl border border-slate-200 shadow-lg text-xs space-y-2 hidden sm:block">
@@ -390,6 +395,18 @@
 
     </div>
   </main>
+
+  <div id="map-modal" class="map-modal hidden fixed inset-0 z-[80] bg-charcoal-950/85 backdrop-blur-sm p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="map-modal-title" aria-hidden="true">
+    <div class="map-modal-panel mx-auto flex h-full w-full max-w-6xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+      <div class="flex shrink-0 items-center justify-between gap-3 border-b border-slate-200 px-4 py-3 sm:px-5">
+        <h2 id="map-modal-title" class="text-sm sm:text-base font-black text-charcoal-950">خريطة العمليات والانتشار الميداني</h2>
+        <button id="close-map-modal" type="button" class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-charcoal-900 hover:bg-slate-200" aria-label="إغلاق الخريطة المكبرة">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <div id="map-modal-stage" class="min-h-0 flex-1 p-2 sm:p-4"></div>
+    </div>
+  </div>
 
   <!-- ======================================================================
        3. تذييل الصفحة الموحد (Unified Charcoal Black Footer)

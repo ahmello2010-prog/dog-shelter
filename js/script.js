@@ -578,6 +578,11 @@ function showToast(message, type = 'info') {
    ========================================================================== */
 function initOperationsMap() {
   const mapElement = document.getElementById('cairo-operations-map');
+  const mapFrame = document.getElementById('operations-map-frame');
+  const mapModal = document.getElementById('map-modal');
+  const mapModalStage = document.getElementById('map-modal-stage');
+  const openMapModalBtn = document.getElementById('open-map-modal');
+  const closeMapModalBtn = document.getElementById('close-map-modal');
   const zonesContainer = document.getElementById('map-zones-container');
   const filterCountBadge = document.getElementById('filtered-count-badge');
   const recenterBtn = document.getElementById('map-recenter-btn');
@@ -773,6 +778,42 @@ function initOperationsMap() {
     zoomControl: true,
     scrollWheelZoom: false // منع التمرير غير المقصود
   });
+
+  // تكبير الخريطة داخل نافذة مستقلة على الهاتف مع إعادة Leaflet إلى أبعاده الجديدة.
+  if (mapFrame && mapModal && mapModalStage && openMapModalBtn && closeMapModalBtn) {
+    const originalMapParent = mapFrame.parentElement;
+    const mapPlaceholder = document.createComment('operations-map-frame');
+    originalMapParent.insertBefore(mapPlaceholder, mapFrame);
+
+    const closeMapModal = () => {
+      if (mapModal.classList.contains('hidden')) return;
+      originalMapParent.insertBefore(mapFrame, mapPlaceholder);
+      mapModal.classList.add('hidden');
+      mapModal.setAttribute('aria-hidden', 'true');
+      mapFrame.classList.remove('map-frame-expanded');
+      document.body.style.overflow = '';
+      map.invalidateSize({ pan: false });
+      openMapModalBtn.focus({ preventScroll: true });
+    };
+
+    openMapModalBtn.addEventListener('click', () => {
+      mapModalStage.appendChild(mapFrame);
+      mapFrame.classList.add('map-frame-expanded');
+      mapModal.classList.remove('hidden');
+      mapModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeMapModalBtn.focus({ preventScroll: true });
+      requestAnimationFrame(() => map.invalidateSize({ pan: false }));
+    });
+
+    closeMapModalBtn.addEventListener('click', closeMapModal);
+    mapModal.addEventListener('click', (event) => {
+      if (event.target === mapModal) closeMapModal();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeMapModal();
+    });
+  }
 
   // تمكين التمرير بالعجلة بعد التركيز
   map.on('focus', () => map.scrollWheelZoom.enable());
