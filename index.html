@@ -125,9 +125,9 @@
     </div>
   </header>
 
-  <!-- القائمة المنسدلة للهواتف (Mobile Drawer / Dropdown) -->
-  <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-charcoal-950/80 backdrop-blur-sm xl:hidden transition-all duration-300">
-    <div class="fixed top-0 right-0 w-5/6 max-w-sm h-full bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+  <!-- القائمة المنسدلة للهواتف - تفتح من الجهة اليسرى تماشياً مع موقع زر القائمة (Left-aligned Mobile Drawer) -->
+  <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-charcoal-950/80 backdrop-blur-sm xl:hidden transition-opacity duration-300">
+    <div id="mobile-menu-drawer" class="fixed top-0 left-0 w-5/6 max-w-sm h-full bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto border-r border-slate-200 transform -translate-x-full transition-transform duration-300 ease-out">
       <div>
         <div class="flex items-center justify-between pb-4 border-b border-gray-100">
           <div class="flex items-center gap-2">

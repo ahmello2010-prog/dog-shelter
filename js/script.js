@@ -36,33 +36,64 @@ function initNavbar() {
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll(); // التحقق الأولي عند التحميل
 
-  // فتح/إغلاق القائمة في الهواتف
-  if (mobileMenuBtn && mobileMenu) {
-    const toggleMobileMenu = () => {
-      const isOpen = mobileMenu.classList.contains('hidden');
-      if (isOpen) {
-        mobileMenu.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      } else {
-        mobileMenu.classList.add('hidden');
-        document.body.style.overflow = '';
-      }
-    };
+  // فتح/إغلاق القائمة في الهواتف من الجهة اليسرى
+  const mobileDrawer = document.getElementById('mobile-menu-drawer');
 
-    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+  const openMobileMenu = () => {
+    if (!mobileMenu) return;
+    mobileMenu.classList.remove('hidden');
+    requestAnimationFrame(() => {
+      if (mobileDrawer) {
+        mobileDrawer.classList.remove('-translate-x-full');
+        mobileDrawer.classList.add('translate-x-0');
+      }
+    });
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMobileMenu = () => {
+    if (!mobileMenu) return;
+    if (mobileDrawer) {
+      mobileDrawer.classList.remove('translate-x-0');
+      mobileDrawer.classList.add('-translate-x-full');
+    }
+    setTimeout(() => {
+      mobileMenu.classList.add('hidden');
+    }, 280);
+    document.body.style.overflow = '';
+  };
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
 
     if (mobileMenuCloseBtn) {
-      mobileMenuCloseBtn.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        document.body.style.overflow = '';
-      });
+      mobileMenuCloseBtn.addEventListener('click', closeMobileMenu);
     }
 
     mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // إغلاق عند النقر على الخلفية المعتمة
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) {
+        closeMobileMenu();
+      }
+    });
+
+    // إغلاق بزر Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        closeMobileMenu();
+      }
     });
   }
 }
